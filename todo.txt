@@ -10,4 +10,9 @@ Ideias:
 - Se a extensão estiver no roteador:
     * Pede para o usuário colocar a chave do bot de atendimento humano
     * A extensão salva essa chave no recursos e usa ela para puxar os dados :galaxybrain:
+- Usar toasts para indicar sucesso ou falha
+
+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
+
+
 

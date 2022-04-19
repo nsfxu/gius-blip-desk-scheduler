@@ -17,9 +17,10 @@ import {
 } from '../../services/resources-service';
 import { DEFAULT_TIME } from './constants';
 import { buildSchedulerMessage } from './buildSchedulerMessage';
+import ToastTypes from '../../constants/toast-type';
 
 import { getAllTeamsAsync } from '../../services/teams-service';
-import { withLoadingAsync } from '../../services/common-service';
+import { showToast, withLoadingAsync } from '../../services/common-service';
 import { getApplicationDataAsync } from '../../services/application-service';
 import { track } from '../../services/analytics-service';
 import { EXTENSION_TRACKS } from '../../constants/trackings';
@@ -32,7 +33,7 @@ const Home = () => {
     const [allTeams, setAllTeams] = useState(null);
     const [times, setTimes] = useState(null);
     const [currentTeam, setCurrentTeam] = useState(null);
-    const [currentWorkTime, setCurrentWorkTime] = useState('workTime');
+    const [currentWorkTime, setCurrentWorkTime] = useState(null);
 
     const [application, setApplication] = useState({ shortName: 'init' });
     const { t } = useTranslation();
@@ -59,7 +60,7 @@ const Home = () => {
                         setFirstTeam(currentTeam);
                     }
                 } catch (error) {
-                    console.log(error);
+                    return {};
                 }
             }
 
@@ -71,16 +72,12 @@ const Home = () => {
                     );
 
                     if (resourceTimes.weekdays && resourceTimes.noWorkDays) {
-                        console.log(resourceTimes);
-
                         handleChangeTimes(resourceTimes);
                     } else {
-                        console.log(resourceTimes);
-
                         handleChangeTimes(DEFAULT_TIME);
                     }
                 } catch (error) {
-                    console.log(error);
+                    return {};
                 }
             }
         });
@@ -126,11 +123,19 @@ const Home = () => {
     };
 
     const saveAsync = async () => {
-        await saveResourceAsync(currentWorkTime, times);
+        const response = await saveResourceAsync(currentWorkTime, times);
 
         track(EXTENSION_TRACKS.save, {
             time: times
         });
+
+        if (response != {}) {
+            showToast(
+                ToastTypes.SUCCESS,
+                'Sucesso',
+                `Fila ${currentTeam} salva com sucesso!`
+            );
+        }
     };
 
     const removeDayOff = (index) => {
@@ -257,7 +262,7 @@ const Home = () => {
                                         addWorkTime={addWorkTime}
                                     />
                                 </div>
-                                <h2>Dias sem trabalhos {currentWorkTime}</h2>
+                                <h2>Dias sem trabalhos</h2>
                                 <DayOff
                                     noWorkDays={times.noWorkDays}
                                     changeDayOff={changeDayOff}

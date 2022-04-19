@@ -17,10 +17,14 @@ const setHeight = (height) =>
         content: height
     });
 
-const showToast = (toast) =>
+const showToast = (type, title, message) =>
     IframeMessageProxy.sendMessage({
         action: IMPContainer.Actions.TOAST,
-        content: toast
+        content: {
+            type,
+            title,
+            message
+        }
     });
 
 const showModal = (title, body, confirm = 'ok', cancel = 'cancel') =>

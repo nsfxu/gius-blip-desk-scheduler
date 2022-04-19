@@ -6,11 +6,6 @@ import propTypes from 'prop-types';
 import { BdsSelect, BdsSelectOption } from 'blip-ds/dist/blip-ds-react';
 
 const SelectTeam = ({ parentCallback, allTeams }) => {
-    SelectTeam.propTypes = {
-        parentCallback: propTypes.any,
-        allTeams: propTypes.any
-    };
-
     const [selectedTeam, setSelectedTeam] = useState('');
     const { t } = useTranslation();
 
@@ -65,6 +60,11 @@ const SelectTeam = ({ parentCallback, allTeams }) => {
     }
 
     return t('loading');
+};
+
+SelectTeam.propTypes = {
+    parentCallback: propTypes.any,
+    allTeams: propTypes.any
 };
 
 export default SelectTeam;

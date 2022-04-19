@@ -35,10 +35,11 @@ const Initialize = ({ dispatch }) => {
             await getLanguageAsync();
             await sleep(DELAY_TIME);
 
-            showToast({
-                type: BlipPortalToastTypes.SUCCESS,
-                message: t('success.loaded')
-            });
+            showToast(
+                BlipPortalToastTypes.SUCCESS,
+                'Sucesso',
+                t('success.loaded')
+            );
         });
     };
 
