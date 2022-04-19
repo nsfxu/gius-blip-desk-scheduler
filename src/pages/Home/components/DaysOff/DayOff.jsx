@@ -37,7 +37,6 @@ const DayOff = ({
                         icon="trash"
                         variant="ghost"
                         arrow={false}
-                        disabled={false}
                         onClick={() => {
                             removeDayOff(index);
                         }}
