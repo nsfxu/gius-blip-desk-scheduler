@@ -16,17 +16,16 @@ import { track } from '../../../../services/analytics-service';
 import { EXTENSION_TRACKS } from '../../../../constants/trackings';
 import { DEFAULT_TIME } from '../../constants';
 import { buildSchedulerMessage } from '../../buildSchedulerMessage';
-import { getApplicationDataAsync } from '../../../../services/application-service';
 
 import DayOff from '../DaysOff';
 import ListWeek from '../ListWeek';
 import Button from '../../../../components/Button';
+import Header from '../Header';
 
 const Scheduler = ({ currentWorkTime }) => {
     const STRONG_DAY_FORMAT_DEFAULT = false;
 
     const [times, setTimes] = useState(null);
-    const [application, setApplication] = useState({ shortName: 'init' });
 
     const { t } = useTranslation();
     const styles = {
@@ -38,11 +37,6 @@ const Scheduler = ({ currentWorkTime }) => {
 
     useEffect(() => {
         withLoadingAsync(async () => {
-            setApplication(await getApplicationDataAsync());
-            track(EXTENSION_TRACKS.open, {
-                botId: application.name
-            });
-
             // Get work schedule resources of a team
             if (currentWorkTime !== null) {
                 try {
@@ -164,6 +158,25 @@ const Scheduler = ({ currentWorkTime }) => {
     if (times !== null) {
         return (
             <div>
+                {/* Header */}
+                <div className="pb4 mb4 bb bw1 bp-bc-neutral-medium-wave">
+                    <bds-typo
+                        style={{ color: '#3A4A65' }}
+                        margin={0}
+                        variant="fs-24"
+                        bold="bold"
+                    >
+                        Dias e horários com atendimento
+                    </bds-typo>
+
+                    <bds-typo style={{ color: '#3A4A65' }} variant="fs-15">
+                        Preencha os horários de atendimento conforme os dias da
+                        semana. Obs.: Você pode adicionar mais de um intervalo
+                        de horário por dia.
+                    </bds-typo>
+                </div>
+
+                {/* Times Container */}
                 <div style={styles.weekContainer}>
                     <ListWeek
                         times={times}
@@ -173,6 +186,8 @@ const Scheduler = ({ currentWorkTime }) => {
                         addWorkTime={addWorkTime}
                     />
                 </div>
+
+                {/* No Work Days */}
                 <h2>Dias sem trabalhos</h2>
                 <DayOff
                     noWorkDays={times.noWorkDays}
@@ -180,8 +195,10 @@ const Scheduler = ({ currentWorkTime }) => {
                     removeDayOff={removeDayOff}
                     addDayOff={addDayOff}
                 />
+
                 <br />
                 <br />
+
                 <Button
                     text={t('labels.save')}
                     icon="save-disk"

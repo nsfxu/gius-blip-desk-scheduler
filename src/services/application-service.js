@@ -1,10 +1,12 @@
 import { IframeMessageProxy } from 'iframe-message-proxy';
 import IMPContainer from '../constants/iframe-message-proxy-container';
+import { filterBlankObject, filterPromiseArray } from '../utils/object';
 
 const PORTAL_NODE = 'postmaster@portal.blip.ai';
 const CONFIGURATION_URI = `lime://${PORTAL_NODE}/configuration`;
 const CONTACTS_URI = '/contacts';
 const THREADS_URI = '/threads';
+const APPLICATIONS_PATH = `/applications`;
 const JSON_TYPE = 'application/json';
 
 const getApplicationDataAsync = async (fullIdentity = null) => {
@@ -16,6 +18,48 @@ const getApplicationDataAsync = async (fullIdentity = null) => {
         return application;
     }
     return { shortName: 'null' };
+};
+
+const getBotDataAsync = async (identity) => {
+    try {
+        const { response } = await IframeMessageProxy.sendMessage({
+            action: IMPContainer.Actions.SEND_COMMAND,
+            content: {
+                destination: IMPContainer.Destinations.BLIP_SERVICE,
+                command: {
+                    method: IMPContainer.CommandMethods.GET,
+                    to: PORTAL_NODE,
+                    uri: `${APPLICATIONS_PATH}/${identity}`
+                }
+            }
+        });
+
+        const data = { ...response, identity };
+
+        return data;
+    } catch (err) {
+        return false;
+    }
+};
+
+const getAllowedSubbotsAsync = async (application) => {
+    const {
+        applicationJson: { settings: appSettings }
+    } = application;
+
+    if (!!appSettings?.children) {
+        const identities = appSettings.children.map((bot) => bot.identity);
+        const promises = identities.map((identity) =>
+            getBotDataAsync(identity)
+        );
+        const result = await Promise.allSettled(promises);
+        const subbotsData = filterPromiseArray(result);
+        const subbotsList = filterBlankObject(subbotsData);
+
+        return subbotsList;
+    }
+
+    return false;
 };
 
 const getConfigurationDataAsync = async () => {
@@ -92,6 +136,8 @@ const getThreadsAsync = async () => {
 
 export {
     getApplicationDataAsync,
+    getBotDataAsync,
+    getAllowedSubbotsAsync,
     getConfigurationDataAsync,
     setConfigurationDataAsync,
     getCurrentLanguageAsync,

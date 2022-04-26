@@ -8,13 +8,17 @@ import SelectTeam from './components/SelectTeam/SelectTeam';
 import Scheduler from './components/Scheduler/Scheduler';
 
 import settings from '../../config';
+import {
+    getAllowedSubbotsAsync,
+    getApplicationDataAsync
+} from '../../services/application-service';
 import { getAllTeamsAsync } from '../../services/teams-service';
 import { withLoadingAsync } from '../../services/common-service';
-import { getApplicationDataAsync } from '../../services/application-service';
 import { track } from '../../services/analytics-service';
 import { EXTENSION_TRACKS } from '../../constants/trackings';
 
 const BLANK = '_blank';
+const ROUTER_TEMPLATE = 'master';
 
 const Home = () => {
     const STRONG_DAY_FORMAT_DEFAULT = false;
@@ -25,13 +29,6 @@ const Home = () => {
 
     const [application, setApplication] = useState({ shortName: 'init' });
     const { t } = useTranslation();
-
-    const styles = {
-        weekContainer: {
-            display: 'flex',
-            justifyContent: 'space-around'
-        }
-    };
 
     useEffect(() => {
         withLoadingAsync(async () => {
@@ -53,6 +50,25 @@ const Home = () => {
             }
         });
     }, [application.shortName, currentWorkTime]);
+
+    useEffect(() => {
+        if (!!application && application?.shortName) {
+            if (isRouter()) {
+                getBotsInfo();
+            }
+        }
+    }, [application]);
+
+    const getBotsInfo = async () => {
+        await withLoadingAsync(async () => {
+            const botData = await getAllowedSubbotsAsync(application);
+            console.log(botData);
+        });
+    };
+
+    const isRouter = () => {
+        return application?.template === ROUTER_TEMPLATE;
+    };
 
     const callback = (newTeam) => {
         setCurrentTeam(newTeam);
@@ -91,25 +107,6 @@ const Home = () => {
                 <BdsPaper className="pa4 mt4">
                     <BdsTypo
                         style={{ color: '#3A4A65' }}
-                        margin={0}
-                        variant="fs-24"
-                        bold="bold"
-                    >
-                        Dias e horários com atendimento
-                    </BdsTypo>
-
-                    <div className="mt2">
-                        <BdsTypo style={{ color: '#3A4A65' }} variant="fs-15">
-                            Preencha os horários de atendimento conforme os dias
-                            da semana. Obs.: Você pode adicionar mais de um
-                            intervalo de horário por dia.
-                        </BdsTypo>
-                    </div>
-                </BdsPaper>
-
-                <BdsPaper className="pa4 mt4">
-                    <BdsTypo
-                        style={{ color: '#3A4A65' }}
                         margin={5}
                         variant="fs-24"
                         bold="bold"
@@ -120,15 +117,11 @@ const Home = () => {
                 </BdsPaper>
 
                 <BdsPaper className="pa4 mt4">
-                    <BdsTypo
-                        style={{ color: '#3A4A65' }}
-                        margin={0}
-                        variant="fs-24"
-                        bold="bold"
-                    >
-                        Horários de {currentTeam}
+                    {currentWorkTime != null ? (
                         <Scheduler currentWorkTime={currentWorkTime} />
-                    </BdsTypo>
+                    ) : (
+                        <p>{t('loading')}</p>
+                    )}
                 </BdsPaper>
             </div>
         </>
