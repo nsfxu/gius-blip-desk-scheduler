@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { withLoadingAsync } from '../../services/common-service';
@@ -9,8 +10,10 @@ import { EXTENSION_TRACKS } from '../../constants/trackings';
 const ROUTER_TEMPLATE = 'master';
 
 const Home = () => {
-    const [application, setApplication] = useState({ shortName: 'init' });
     const { t } = useTranslation();
+
+    const [application, setApplication] = useState({ shortName: 'init' });
+    const history = useHistory();
 
     // Return current bot data
     useEffect(() => {
@@ -19,7 +22,6 @@ const Home = () => {
             track(EXTENSION_TRACKS.open, {
                 botId: application.name
             });
-            console.log(application);
         });
     }, [application.shortName]);
 
@@ -28,23 +30,21 @@ const Home = () => {
     //        Builder
     useEffect(() => {
         if (!!application && application?.shortName !== 'init') {
+            // if the extension is installed into a router, we redirected the user to the RouterScheduler page
+            // if not, we send the user to the BuilderScheduler page
             if (isRouter()) {
-                console.log('Router 🤖');
+                history.push('/router');
             } else {
-                console.log('Builder 👷‍');
+                history.push('/builder');
             }
         }
-    });
+    }, [application]);
 
     const isRouter = () => {
         return application?.template === ROUTER_TEMPLATE;
     };
 
-    return (
-        <div className="ph1 ph4-m ph5-ns pb5">
-            <h1>{t('loading')}</h1>
-        </div>
-    );
+    return <h1>{t('loading')}</h1>;
 };
 
 export default Home;

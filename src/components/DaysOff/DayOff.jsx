@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import Button from '../../../../components/Button';
-import Input from '../../../../components/Input';
+import Button from '../Button';
+import Input from '../Input';
 
 const DayOff = ({
     noWorkDays,

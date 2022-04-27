@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import Input from '../../../../components/Input';
-import Button from '../../../../components/Button';
+import Input from '../Input';
+import Button from '../Button';
 
 const HoursList = ({
     workTimes,

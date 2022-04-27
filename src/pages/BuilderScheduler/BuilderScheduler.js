@@ -3,26 +3,24 @@ import { useTranslation } from 'react-i18next';
 // eslint-disable-next-line import/named
 
 import { BdsPaper, BdsTypo } from 'blip-ds/dist/blip-ds-react';
-import Header from './components/Header';
-import SelectTeam from './components/SelectTeam/SelectTeam';
-import Scheduler from './components/Scheduler/Scheduler';
+import Header from '../../components/Header';
+import SelectTeam from '../../components/SelectTeam/SelectTeam';
+import Scheduler from '../../components/Scheduler/Scheduler';
 
 import settings from '../../config';
-import {
-    getAllowedSubbotsAsync,
-    getApplicationDataAsync
-} from '../../services/application-service';
+import { getApplicationDataAsync } from '../../services/application-service';
 import { getResourceAsync } from '../../services/resources-service';
 import { getAllTeamsAsync } from '../../services/teams-service';
 import { withLoadingAsync } from '../../services/common-service';
 import { track } from '../../services/analytics-service';
 import { EXTENSION_TRACKS } from '../../constants/trackings';
-import { DEFAULT_TIME } from './constants';
+import { DEFAULT_TIME } from '../../constants/defaultTime';
 
 const BLANK = '_blank';
-const ROUTER_TEMPLATE = 'master';
 
-const Home = () => {
+const BuilderScheduler = () => {
+    console.log('Builder 👷‍');
+
     const [allTeams, setAllTeams] = useState(null);
     const [currentTeam, setCurrentTeam] = useState(null);
     const [currentWorkTime, setCurrentWorkTime] = useState(null);
@@ -42,11 +40,11 @@ const Home = () => {
         });
     }, [application.shortName]);
 
-    // Get all teams if the extension is in a builder bot
+    // Get all teams
     useEffect(() => {
         withLoadingAsync(async () => {
             // Get All Teams if is not already done
-            if (allTeams == null && !isRouter()) {
+            if (allTeams == null) {
                 try {
                     setAllTeams(await getAllTeamsAsync());
                     if (allTeams != null) {
@@ -79,18 +77,7 @@ const Home = () => {
                 }
             }
         });
-    }, [currentWorkTime]);    
-
-    // const getBotsInfo = async () => {
-    //     await withLoadingAsync(async () => {
-    //         const botData = await getAllowedSubbotsAsync(application);
-    //         console.log(botData);
-    //     });
-    // };
-
-    const isRouter = () => {
-        return application?.template === ROUTER_TEMPLATE;
-    };
+    }, [currentWorkTime]);
 
     const callback = (newTeam) => {
         setCurrentTeam(newTeam);
@@ -155,4 +142,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default BuilderScheduler;

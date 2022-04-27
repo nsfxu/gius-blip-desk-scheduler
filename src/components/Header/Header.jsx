@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import PageHeader from '../../../../components/PageHeader';
-import Button from '../../../../components/Button';
+import Button from '../Button';
+import PageHeader from '../PageHeader';
 
 const Header = ({ title, icon, onClick = () => {} }) => {
     const { t } = useTranslation();

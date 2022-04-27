@@ -3,21 +3,20 @@ import { useTranslation } from 'react-i18next';
 
 import { BdsPaper } from 'blip-ds/dist/blip-ds-react';
 import propTypes from 'prop-types';
-import ToastTypes from '../../../../constants/toast-type';
+import ToastTypes from '../../constants/toast-type';
 
-import {
-    showToast,
-    withLoadingAsync
-} from '../../../../services/common-service';
-import { saveResourceAsync } from '../../../../services/resources-service';
-import { track } from '../../../../services/analytics-service';
-import { EXTENSION_TRACKS } from '../../../../constants/trackings';
-import { DEFAULT_TIME } from '../../constants';
-import { buildSchedulerMessage } from '../../buildSchedulerMessage';
+import { showToast, withLoadingAsync } from '../../services/common-service';
+import { saveResourceAsync } from '../../services/resources-service';
+
+import { track } from '../../services/analytics-service';
+import { EXTENSION_TRACKS } from '../../constants/trackings';
+
+import { DEFAULT_TIME } from '../../constants/defaultTime';
+import { buildSchedulerMessage } from '../../utils/buildSchedulerMessage';
 
 import DayOff from '../DaysOff';
 import ListWeek from '../ListWeek';
-import Button from '../../../../components/Button';
+import Button from '../Button';
 
 const Scheduler = ({ currentResources, currentWorkTime }) => {
     const STRONG_DAY_FORMAT_DEFAULT = false;
