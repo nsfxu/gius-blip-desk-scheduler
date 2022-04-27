@@ -38,10 +38,11 @@ const Home = () => {
             track(EXTENSION_TRACKS.open, {
                 botId: application.name
             });
+            console.log(application);
         });
     }, [application.shortName]);
 
-    // Get all teams if the extension is installed into a builder bot
+    // Get all teams if the extension is in a builder bot
     useEffect(() => {
         withLoadingAsync(async () => {
             // Get All Teams if is not already done
@@ -78,23 +79,14 @@ const Home = () => {
                 }
             }
         });
-    }, [currentWorkTime]);
+    }, [currentWorkTime]);    
 
-    // Get SubBots info if we are in a router
-    // useEffect(() => {
-    //     if (!!application && application?.shortName) {
-    //         if (isRouter()) {
-    //             getBotsInfo();
-    //         }
-    //     }
-    // }, [application]);
-
-    const getBotsInfo = async () => {
-        await withLoadingAsync(async () => {
-            const botData = await getAllowedSubbotsAsync(application);
-            console.log(botData);
-        });
-    };
+    // const getBotsInfo = async () => {
+    //     await withLoadingAsync(async () => {
+    //         const botData = await getAllowedSubbotsAsync(application);
+    //         console.log(botData);
+    //     });
+    // };
 
     const isRouter = () => {
         return application?.template === ROUTER_TEMPLATE;
@@ -130,7 +122,7 @@ const Home = () => {
         <>
             <div className="ph1 ph4-m ph5-ns pb5">
                 <Header
-                    title="Giu's Blip desk scheduler"
+                    title="Blip desk scheduler"
                     onClick={() => window.open(settings.repositoryUrl, BLANK)}
                 />
 
