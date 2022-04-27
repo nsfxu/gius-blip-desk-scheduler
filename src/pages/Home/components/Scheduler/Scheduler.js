@@ -20,7 +20,6 @@ import { buildSchedulerMessage } from '../../buildSchedulerMessage';
 import DayOff from '../DaysOff';
 import ListWeek from '../ListWeek';
 import Button from '../../../../components/Button';
-import Header from '../Header';
 
 const Scheduler = ({ currentWorkTime }) => {
     const STRONG_DAY_FORMAT_DEFAULT = false;
@@ -175,7 +174,6 @@ const Scheduler = ({ currentWorkTime }) => {
                         de horário por dia.
                     </bds-typo>
                 </div>
-
                 {/* Times Container */}
                 <div style={styles.weekContainer}>
                     <ListWeek
@@ -186,7 +184,6 @@ const Scheduler = ({ currentWorkTime }) => {
                         addWorkTime={addWorkTime}
                     />
                 </div>
-
                 {/* No Work Days */}
                 <h2>Dias sem trabalhos</h2>
                 <DayOff
@@ -195,10 +192,8 @@ const Scheduler = ({ currentWorkTime }) => {
                     removeDayOff={removeDayOff}
                     addDayOff={addDayOff}
                 />
-
                 <br />
                 <br />
-
                 <Button
                     text={t('labels.save')}
                     icon="save-disk"
