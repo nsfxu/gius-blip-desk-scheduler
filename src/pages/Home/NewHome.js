@@ -12,33 +12,40 @@ import {
     getAllowedSubbotsAsync,
     getApplicationDataAsync
 } from '../../services/application-service';
+import { getResourceAsync } from '../../services/resources-service';
 import { getAllTeamsAsync } from '../../services/teams-service';
 import { withLoadingAsync } from '../../services/common-service';
 import { track } from '../../services/analytics-service';
 import { EXTENSION_TRACKS } from '../../constants/trackings';
+import { DEFAULT_TIME } from './constants';
 
 const BLANK = '_blank';
 const ROUTER_TEMPLATE = 'master';
 
 const Home = () => {
-    const STRONG_DAY_FORMAT_DEFAULT = false;
-
     const [allTeams, setAllTeams] = useState(null);
     const [currentTeam, setCurrentTeam] = useState(null);
     const [currentWorkTime, setCurrentWorkTime] = useState(null);
+    const [currentResources, setCurrentResources] = useState(null);
 
     const [application, setApplication] = useState({ shortName: 'init' });
     const { t } = useTranslation();
 
+    // Return current bot data
     useEffect(() => {
         withLoadingAsync(async () => {
             setApplication(await getApplicationDataAsync());
             track(EXTENSION_TRACKS.open, {
                 botId: application.name
             });
+        });
+    }, [application.shortName]);
 
+    // Get all teams if the extension is installed into a builder bot
+    useEffect(() => {
+        withLoadingAsync(async () => {
             // Get All Teams if is not already done
-            if (allTeams == null) {
+            if (allTeams == null && !isRouter()) {
                 try {
                     setAllTeams(await getAllTeamsAsync());
                     if (allTeams != null) {
@@ -49,15 +56,38 @@ const Home = () => {
                 }
             }
         });
-    }, [application.shortName, currentWorkTime]);
+    });
 
+    // Get work schedule info of a team
     useEffect(() => {
-        if (!!application && application?.shortName) {
-            if (isRouter()) {
-                getBotsInfo();
+        withLoadingAsync(async () => {
+            // Check if the currentWorkTime exists
+            if (currentWorkTime !== null) {
+                try {
+                    const resourceTimes = await getResourceAsync(
+                        currentWorkTime
+                    );
+
+                    if (resourceTimes.weekdays && resourceTimes.noWorkDays) {
+                        setCurrentResources(resourceTimes);
+                    } else {
+                        setCurrentResources(DEFAULT_TIME);
+                    }
+                } catch (error) {
+                    return {};
+                }
             }
-        }
-    }, [application]);
+        });
+    }, [currentWorkTime]);
+
+    // Get SubBots info if we are in a router
+    // useEffect(() => {
+    //     if (!!application && application?.shortName) {
+    //         if (isRouter()) {
+    //             getBotsInfo();
+    //         }
+    //     }
+    // }, [application]);
 
     const getBotsInfo = async () => {
         await withLoadingAsync(async () => {
@@ -104,6 +134,7 @@ const Home = () => {
                     onClick={() => window.open(settings.repositoryUrl, BLANK)}
                 />
 
+                {/* Team selector */}
                 <BdsPaper className="pa4 mt4">
                     <BdsTypo
                         style={{ color: '#3A4A65' }}
@@ -116,13 +147,17 @@ const Home = () => {
                     <SelectTeam parentCallback={callback} allTeams={allTeams} />
                 </BdsPaper>
 
-                <BdsPaper className="pa4 mt4">
-                    {currentWorkTime != null ? (
-                        <Scheduler currentWorkTime={currentWorkTime} />
+                {/* Scheduler options */}
+                <div>
+                    {currentResources !== null && currentWorkTime !== null ? (
+                        <Scheduler
+                            currentResources={currentResources}
+                            currentWorkTime={currentWorkTime}
+                        />
                     ) : (
                         <p>{t('loading')}</p>
                     )}
-                </BdsPaper>
+                </div>
             </div>
         </>
     );

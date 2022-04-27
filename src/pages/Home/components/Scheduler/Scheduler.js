@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { BdsPaper } from 'blip-ds/dist/blip-ds-react';
 import propTypes from 'prop-types';
 import ToastTypes from '../../../../constants/toast-type';
 
@@ -8,10 +9,7 @@ import {
     showToast,
     withLoadingAsync
 } from '../../../../services/common-service';
-import {
-    getResourceAsync,
-    saveResourceAsync
-} from '../../../../services/resources-service';
+import { saveResourceAsync } from '../../../../services/resources-service';
 import { track } from '../../../../services/analytics-service';
 import { EXTENSION_TRACKS } from '../../../../constants/trackings';
 import { DEFAULT_TIME } from '../../constants';
@@ -21,7 +19,7 @@ import DayOff from '../DaysOff';
 import ListWeek from '../ListWeek';
 import Button from '../../../../components/Button';
 
-const Scheduler = ({ currentWorkTime }) => {
+const Scheduler = ({ currentResources, currentWorkTime }) => {
     const STRONG_DAY_FORMAT_DEFAULT = false;
 
     const [times, setTimes] = useState(null);
@@ -34,26 +32,20 @@ const Scheduler = ({ currentWorkTime }) => {
         }
     };
 
+    // Apply currentResources and handle the changes
     useEffect(() => {
         withLoadingAsync(async () => {
-            // Get work schedule resources of a team
-            if (currentWorkTime !== null) {
-                try {
-                    const resourceTimes = await getResourceAsync(
-                        currentWorkTime
-                    );
-
-                    if (resourceTimes.weekdays && resourceTimes.noWorkDays) {
-                        handleChangeTimes(resourceTimes);
-                    } else {
-                        handleChangeTimes(DEFAULT_TIME);
-                    }
-                } catch (error) {
-                    return {};
+            try {
+                if (currentResources.weekdays && currentResources.noWorkDays) {
+                    handleChangeTimes(currentResources);
+                } else {
+                    handleChangeTimes(DEFAULT_TIME);
                 }
+            } catch (error) {
+                return {};
             }
         });
-    }, [currentWorkTime]);
+    }, [currentResources]);
 
     // #region Scheduler Functions
 
@@ -156,53 +148,70 @@ const Scheduler = ({ currentWorkTime }) => {
 
     if (times !== null) {
         return (
-            <div>
-                {/* Header */}
-                <div className="pb4 mb4 bb bw1 bp-bc-neutral-medium-wave">
-                    <bds-typo
-                        style={{ color: '#3A4A65' }}
-                        margin={0}
-                        variant="fs-24"
-                        bold="bold"
-                    >
-                        Dias e horários com atendimento
-                    </bds-typo>
+            <>
+                {/* Weeks container */}
+                <BdsPaper className="pa4 mt4">
+                    <div className="pb4 mb4 bb bw1 bp-bc-neutral-medium-wave">
+                        <bds-typo
+                            style={{ color: '#3A4A65' }}
+                            margin={0}
+                            variant="fs-24"
+                            bold="bold"
+                        >
+                            Horários de atendimento
+                        </bds-typo>
 
-                    <bds-typo style={{ color: '#3A4A65' }} variant="fs-15">
-                        Preencha os horários de atendimento conforme os dias da
-                        semana. Obs.: Você pode adicionar mais de um intervalo
-                        de horário por dia.
-                    </bds-typo>
-                </div>
-                {/* Times Container */}
-                <div style={styles.weekContainer}>
-                    <ListWeek
-                        times={times}
-                        changeStart={changeStart}
-                        changeEnd={changeEnd}
-                        removeWorkTime={removeWorkTime}
-                        addWorkTime={addWorkTime}
+                        <bds-typo style={{ color: '#3A4A65' }} variant="fs-15">
+                            Preencha os horários de atendimento conforme os dias
+                            da semana. Obs.: Você pode adicionar mais de um
+                            intervalo de horário por dia.
+                        </bds-typo>
+                    </div>
+                    <div style={styles.weekContainer}>
+                        <ListWeek
+                            times={times}
+                            changeStart={changeStart}
+                            changeEnd={changeEnd}
+                            removeWorkTime={removeWorkTime}
+                            addWorkTime={addWorkTime}
+                        />
+                    </div>
+                </BdsPaper>
+
+                {/* No work days container */}
+                <BdsPaper className="pa4 mt4">
+                    <div className="pb4 mb4 bb bw1 bp-bc-neutral-medium-wave">
+                        <bds-typo
+                            style={{ color: '#3A4A65' }}
+                            margin={0}
+                            variant="fs-24"
+                            bold="bold"
+                        >
+                            Dias sem atendimento
+                        </bds-typo>
+
+                        <bds-typo style={{ color: '#3A4A65' }} variant="fs-15">
+                            Preencha abaixo os dias que não haverão atendimento.
+                        </bds-typo>
+                    </div>
+                    <DayOff
+                        noWorkDays={times.noWorkDays}
+                        changeDayOff={changeDayOff}
+                        removeDayOff={removeDayOff}
+                        addDayOff={addDayOff}
                     />
-                </div>
-                {/* No Work Days */}
-                <h2>Dias sem trabalhos</h2>
-                <DayOff
-                    noWorkDays={times.noWorkDays}
-                    changeDayOff={changeDayOff}
-                    removeDayOff={removeDayOff}
-                    addDayOff={addDayOff}
-                />
-                <br />
-                <br />
-                <Button
-                    text={t('labels.save')}
-                    icon="save-disk"
-                    variant="primary"
-                    arrow={false}
-                    disabled={false}
-                    onClick={saveAsync}
-                />
-            </div>
+                    <br />
+                    <br />
+                    <Button
+                        text={t('labels.save')}
+                        icon="save-disk"
+                        variant="primary"
+                        arrow={false}
+                        disabled={false}
+                        onClick={saveAsync}
+                    />
+                </BdsPaper>
+            </>
         );
     }
 
@@ -210,6 +219,7 @@ const Scheduler = ({ currentWorkTime }) => {
 };
 
 Scheduler.propTypes = {
+    currentResources: propTypes.any,
     currentWorkTime: propTypes.any
 };
 
