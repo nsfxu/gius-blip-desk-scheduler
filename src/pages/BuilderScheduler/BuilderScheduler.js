@@ -52,6 +52,10 @@ const BuilderScheduler = () => {
                 }
             }
         });
+
+        setTimeout(() => {
+            console.log('you can see me after 2 seconds');
+        }, 5000);
     });
 
     // Get work schedule info of a team

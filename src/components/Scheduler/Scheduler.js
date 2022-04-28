@@ -150,6 +150,7 @@ const Scheduler = ({ currentResources, currentWorkTime }) => {
         return (
             <>
                 {/* Weeks container */}
+
                 <BdsPaper className="pa4 mt4">
                     <div className="pb4 mb4 bb bw1 bp-bc-neutral-medium-wave">
                         <bds-typo
