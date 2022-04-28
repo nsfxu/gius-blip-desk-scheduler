@@ -82,7 +82,7 @@ const Scheduler = ({ currentResources, currentWorkTime }) => {
     const removeDayOff = (index) => {
         const newVal = { ...times };
         newVal.noWorkDays.splice(index, 1);
-        setTimes(newVal);
+        handleChangeTimes(newVal);
     };
 
     const removeWorkTime = (indexWeek, indexHour) => {
@@ -100,6 +100,7 @@ const Scheduler = ({ currentResources, currentWorkTime }) => {
         if (workTime) {
             workTime.start = event.target.value;
         }
+        console.log(workTime);
         handleChangeTimes(newVal);
     };
 
@@ -193,14 +194,15 @@ const Scheduler = ({ currentResources, currentWorkTime }) => {
                             Preencha abaixo os dias que não haverão atendimento.
                         </bds-typo>
                     </div>
-                    <DayOff
-                        noWorkDays={times.noWorkDays}
-                        changeDayOff={changeDayOff}
-                        removeDayOff={removeDayOff}
-                        addDayOff={addDayOff}
-                    />
-                    <br />
-                    <br />
+                    <div className="pb3">
+                        <DayOff
+                            noWorkDays={times.noWorkDays}
+                            changeDayOff={changeDayOff}
+                            removeDayOff={removeDayOff}
+                            addDayOff={addDayOff}
+                        />
+                    </div>
+
                     <Button
                         text={t('labels.save')}
                         icon="save-disk"

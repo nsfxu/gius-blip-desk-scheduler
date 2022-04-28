@@ -21,7 +21,7 @@ const DayOff = ({
     return (
         <div data-testid="day-off">
             {noWorkDays.map((element, index) => (
-                <div key={index} style={styles.daysOffGroup}>
+                <div key={index} style={styles.daysOffGroup} className="pb1">
                     <Input
                         name="start"
                         placeholder="MM-DD"

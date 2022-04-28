@@ -22,26 +22,4 @@ const getAllTeamsAsync = async () => {
     }
 };
 
-/*
-const saveResourceAsync = async (resource, content) => {
-    try {
-        const { response } = await IframeMessageProxy.sendMessage({
-            action: IMPConstants.Actions.SEND_COMMAND,
-            content: {
-                destination: IMPConstants.Destinations.MESSAGING_HUB_SERVICE,
-                command: {
-                    method: IMPConstants.CommandMethods.SET,
-                    uri: `${BASE_URI}/${resource}`,
-                    type: APP_JSON,
-                    resource: JSON.stringify(content)
-                }
-            }
-        });
-        return response;
-    } catch (error) {
-        return {};
-    }
-};
-*/
-
 export { getAllTeamsAsync };

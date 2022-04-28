@@ -39,17 +39,19 @@ const HoursList = ({
                             changeEnd(index, indexHour, event);
                         }}
                     />
-                    <Button
-                        text=""
-                        icon="trash"
-                        variant="ghost"
-                        arrow={false}
-                        disabled={false}
-                        dataTestId={`btn-remove-work-time-${index}-${indexHour}`}
-                        onClick={() => {
-                            removeWorkTime(index, indexHour);
-                        }}
-                    />
+                    <div className="pl2">
+                        <Button
+                            text=""
+                            icon="trash"
+                            variant="ghost"
+                            arrow={false}
+                            disabled={false}
+                            dataTestId={`btn-remove-work-time-${index}-${indexHour}`}
+                            onClick={() => {
+                                removeWorkTime(index, indexHour);
+                            }}
+                        />
+                    </div>
                 </div>
             ))}
             <br />
