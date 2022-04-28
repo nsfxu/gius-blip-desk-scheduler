@@ -32,28 +32,32 @@ const DayOff = ({
                         }}
                         dataTestId={`ipt-data-${index}`}
                     />
-                    <Button
-                        text=""
-                        icon="trash"
-                        variant="ghost"
-                        arrow={false}
-                        onClick={() => {
-                            removeDayOff(index);
-                        }}
-                        dataTestId={`btn-remove-${index}`}
-                    />
+                    <div className="w1">
+                        <Button
+                            text=""
+                            icon="trash"
+                            variant="ghost"
+                            arrow={false}
+                            onClick={() => {
+                                removeDayOff(index);
+                            }}
+                            dataTestId={`btn-remove-${index}`}
+                        />
+                    </div>
                 </div>
             ))}
             <br />
-            <Button
-                dataTestId={`btn-add`}
-                text={t('labels.new')}
-                icon="add"
-                variant="primary"
-                arrow={false}
-                disabled={false}
-                onClick={addDayOff}
-            />
+            <div className="w1">
+                <Button
+                    dataTestId={`btn-add`}
+                    text={t('labels.new')}
+                    icon="add"
+                    variant="primary"
+                    arrow={false}
+                    disabled={false}
+                    onClick={addDayOff}
+                />
+            </div>
         </div>
     );
 };

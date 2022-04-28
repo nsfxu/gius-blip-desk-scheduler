@@ -203,14 +203,16 @@ const Scheduler = ({ currentResources, currentWorkTime }) => {
                         />
                     </div>
 
-                    <Button
-                        text={t('labels.save')}
-                        icon="save-disk"
-                        variant="primary"
-                        arrow={false}
-                        disabled={false}
-                        onClick={saveAsync}
-                    />
+                    <div className="w1">
+                        <Button
+                            text={t('labels.save')}
+                            icon="save-disk"
+                            variant="primary"
+                            arrow={false}
+                            disabled={false}
+                            onClick={saveAsync}
+                        />
+                    </div>
                 </BdsPaper>
             </>
         );

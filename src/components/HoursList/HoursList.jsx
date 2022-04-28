@@ -39,7 +39,7 @@ const HoursList = ({
                             changeEnd(index, indexHour, event);
                         }}
                     />
-                    <div className="pl2">
+                    <div className="pl2 w-10">
                         <Button
                             text=""
                             icon="trash"
@@ -55,17 +55,19 @@ const HoursList = ({
                 </div>
             ))}
             <br />
-            <Button
-                text={t('labels.new')}
-                icon="add"
-                variant="primary"
-                arrow={false}
-                disabled={false}
-                dataTestId={`btn-add-work-time-${index}`}
-                onClick={() => {
-                    addWorkTime(index);
-                }}
-            />
+            <div className="w-10">
+                <Button
+                    text={t('labels.new')}
+                    icon="add"
+                    variant="primary"
+                    arrow={false}
+                    disabled={false}
+                    dataTestId={`btn-add-work-time-${index}`}
+                    onClick={() => {
+                        addWorkTime(index);
+                    }}
+                />
+            </div>
         </div>
     );
 };
