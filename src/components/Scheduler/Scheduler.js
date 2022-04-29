@@ -19,7 +19,7 @@ import DayOff from '../DaysOff';
 import ListWeek from '../ListWeek';
 import Button from '../Button';
 
-const Scheduler = ({ currentResources, currentWorkTime }) => {
+const Scheduler = ({ currentResources, currentWorkTime, currentTeam }) => {
     const STRONG_DAY_FORMAT_DEFAULT = false;
 
     const [times, setTimes] = useState(null);
@@ -39,7 +39,9 @@ const Scheduler = ({ currentResources, currentWorkTime }) => {
                 if (currentResources.weekdays && currentResources.noWorkDays) {
                     handleChangeTimes(currentResources);
                 } else {
-                    handleChangeTimes(DEFAULT_TIME);
+                    withLoadingAsync(() => {
+                        handleChangeTimes(DEFAULT_TIME);
+                    });
                 }
             } catch (error) {
                 return {};
@@ -101,7 +103,6 @@ const Scheduler = ({ currentResources, currentWorkTime }) => {
         if (workTime) {
             workTime.start = event.target.value;
         }
-        console.log(workTime);
         handleChangeTimes(newVal);
     };
 
@@ -151,7 +152,6 @@ const Scheduler = ({ currentResources, currentWorkTime }) => {
         return (
             <>
                 {/* Weeks container */}
-
                 <BdsPaper className="pa4 mt4">
                     <div className="pb4 mb4 bb bw1 bp-bc-neutral-medium-wave">
                         <bds-typo
@@ -160,7 +160,7 @@ const Scheduler = ({ currentResources, currentWorkTime }) => {
                             variant="fs-24"
                             bold="bold"
                         >
-                            Horários de atendimento
+                            Horários de atendimento - {currentTeam}
                         </bds-typo>
 
                         <bds-typo style={{ color: '#3A4A65' }} variant="fs-15">
@@ -189,7 +189,7 @@ const Scheduler = ({ currentResources, currentWorkTime }) => {
                             variant="fs-24"
                             bold="bold"
                         >
-                            Dias sem atendimento
+                            Dias sem atendimento - {currentTeam}
                         </bds-typo>
 
                         <bds-typo style={{ color: '#3A4A65' }} variant="fs-15">
@@ -204,7 +204,6 @@ const Scheduler = ({ currentResources, currentWorkTime }) => {
                             addDayOff={addDayOff}
                         />
                     </div>
-
                     <div className="w1">
                         <Button
                             text={t('labels.save')}
@@ -225,7 +224,8 @@ const Scheduler = ({ currentResources, currentWorkTime }) => {
 
 Scheduler.propTypes = {
     currentResources: propTypes.any,
-    currentWorkTime: propTypes.any
+    currentWorkTime: propTypes.any,
+    currentTeam: propTypes.string
 };
 
 export default Scheduler;

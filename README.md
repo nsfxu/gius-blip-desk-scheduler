@@ -1,16 +1,10 @@
 Validar:
 - Se não existir nenhuma equipe
-- Se a extensão estiver no roteador
+    * Router pendente
+    * Builder pendente
 - Se a API de busca de times falhar por algum motivo
-
-Obs:
-- Só puxa as filas que tiver pelo menos um atendente atrelado
-
-Ideias:
-- Se a extensão estiver no roteador:
-    * Pede para o usuário colocar a chave do bot de atendimento humano
-    * A extensão salva essa chave no recursos e usa ela para puxar os dados :galaxybrain:
-- Usar toasts para indicar sucesso ou falha
+    * Router feito
+    * Builder pendente
 
 Erros:
 - Se você deletar os feriados rapidamente, o plugin cria duplicadas

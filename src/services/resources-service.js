@@ -19,7 +19,7 @@ const getResourceAsync = async (resource) => {
         });
         return response;
     } catch (error) {
-        return error;
+        return JSON.parse(error);
     }
 };
 

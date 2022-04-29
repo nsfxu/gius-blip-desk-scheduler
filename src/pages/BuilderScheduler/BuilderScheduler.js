@@ -130,6 +130,7 @@ const BuilderScheduler = () => {
                         <Scheduler
                             currentResources={currentResources}
                             currentWorkTime={currentWorkTime}
+                            currentTeam={currentTeam}
                         />
                     ) : (
                         <p>{t('loading')}</p>

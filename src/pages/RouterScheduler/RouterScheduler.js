@@ -5,6 +5,9 @@ import { useTranslation } from 'react-i18next';
 import { BdsPaper, BdsTypo } from 'blip-ds/dist/blip-ds-react';
 import Header from '../../components/Header';
 import SelectTeam from '../../components/SelectTeam/SelectTeam';
+import Scheduler from '../../components/Scheduler/Scheduler';
+import Input from '../../components/Input';
+import Button from '../../components/Button';
 
 import ToastTypes from '../../constants/toast-type';
 import settings from '../../config';
@@ -17,8 +20,7 @@ import { getAllTeams } from '../../services/api-service';
 import { track } from '../../services/analytics-service';
 import { EXTENSION_TRACKS } from '../../constants/trackings';
 import { showToast, withLoadingAsync } from '../../services/common-service';
-import Input from '../../components/Input';
-import Button from '../../components/Button';
+import { DEFAULT_TIME } from '../../constants/defaultTime';
 
 const BLANK = '_blank';
 const RESOURCE_NAME = 'botAttendanceKey';
@@ -32,6 +34,7 @@ const RouterScheduler = () => {
     const [allTeams, setAllTeams] = useState(null);
     const [currentTeam, setCurrentTeam] = useState(null);
     const [currentWorkTime, setCurrentWorkTime] = useState(null);
+    const [currentResources, setCurrentResources] = useState(null);
 
     // Return current router data
     useEffect(() => {
@@ -65,6 +68,32 @@ const RouterScheduler = () => {
         });
     });
 
+    // Get work schedule info of a team
+    useEffect(() => {
+        withLoadingAsync(async () => {
+            // Check if the currentWorkTime exists
+            if (currentWorkTime !== null) {
+                try {
+                    const resourceTimes = await getResourceAsync(
+                        currentWorkTime
+                    );
+
+                    if (
+                        resourceTimes.weekdays &&
+                        resourceTimes.noWorkDays &&
+                        !resourceTimes.name
+                    ) {
+                        setCurrentResources(resourceTimes);
+                    } else {
+                        setCurrentResources(DEFAULT_TIME);
+                    }
+                } catch (error) {
+                    return {};
+                }
+            }
+        });
+    }, [currentWorkTime]);
+
     // ==================================
     // #region attendanceBotKey functions
     // ==================================
@@ -82,7 +111,7 @@ const RouterScheduler = () => {
                 showToast(
                     ToastTypes.DANGER,
                     'Error',
-                    `A chave desse bot é inválida`
+                    `A chave desse bot é inválida.`
                 );
 
                 return false;
@@ -104,7 +133,7 @@ const RouterScheduler = () => {
                 showToast(
                     ToastTypes.SUCCESS,
                     'Sucesso',
-                    `Chave do bot alterada com sucesso`
+                    `Chave do bot alterada com sucesso.`
                 );
             }
         });
@@ -125,13 +154,12 @@ const RouterScheduler = () => {
                         showToast(
                             ToastTypes.DANGER,
                             'Erro',
-                            `Não foi possível buscar as equipes com a chave inserida`
+                            `Não foi possível buscar as equipes com a chave inserida.`
                         );
                     }
 
                     if (response.data.resource) {
                         hideTeamsSelector();
-
                         setAllTeams(response.data.resource);
                     }
                 } catch (error) {
@@ -178,7 +206,8 @@ const RouterScheduler = () => {
                 {/* Bot selector */}
                 <BdsPaper className="pa4 mt4">
                     {/* Title container */}
-                    <div className="mb4">
+
+                    <div className="pb4 mb4 bb bw1 bp-bc-neutral-medium-wave">
                         <BdsTypo
                             style={{ color: '#3A4A65' }}
                             margin={5}
@@ -221,23 +250,47 @@ const RouterScheduler = () => {
                     </div>
                 </BdsPaper>
 
+                {/* Team selector */}
                 <div>
                     {allTeams !== null ? (
                         // Team selection container
                         <BdsPaper className="pa4 mt4">
-                            <BdsTypo
-                                style={{ color: '#3A4A65' }}
-                                margin={5}
-                                variant="fs-24"
-                                bold="bold"
-                            >
-                                Selecione a equipe
-                            </BdsTypo>
+                            <div className="pb4 mb4 bb bw1 bp-bc-neutral-medium-wave">
+                                <bds-typo
+                                    style={{ color: '#3A4A65' }}
+                                    margin={0}
+                                    variant="fs-24"
+                                    bold="bold"
+                                >
+                                    Selecione a equipe
+                                </bds-typo>
+
+                                <bds-typo
+                                    style={{ color: '#3A4A65' }}
+                                    variant="fs-15"
+                                >
+                                    Obs.: Só apareceram as equipes que tiverem
+                                    pelo menos um atendente atrelado.
+                                </bds-typo>
+                            </div>
                             <SelectTeam
                                 parentCallback={callback}
                                 allTeams={allTeams}
                             />
                         </BdsPaper>
+                    ) : (
+                        ''
+                    )}
+                </div>
+
+                {/* Scheduler options */}
+                <div>
+                    {currentResources !== null && currentWorkTime !== null ? (
+                        <Scheduler
+                            currentResources={currentResources}
+                            currentWorkTime={currentWorkTime}
+                            currentTeam={currentTeam}
+                        />
                     ) : (
                         ''
                     )}
