@@ -1,48 +1,115 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { BdsPaper, BdsTypo } from 'blip-ds/dist/blip-ds-react';
-import SelectBot from '../../components/SelectBot';
 import Header from '../../components/Header';
+import SelectTeam from '../../components/SelectTeam/SelectTeam';
 
+import ToastTypes from '../../constants/toast-type';
 import settings from '../../config';
+import { getApplicationDataAsync } from '../../services/application-service';
 import {
-    getAllowedSubbotsAsync,
-    getApplicationDataAsync,
-    getBotDataAsync
-} from '../../services/application-service';
+    getResourceAsync,
+    saveResourceAsync
+} from '../../services/resources-service';
 import { track } from '../../services/analytics-service';
 import { EXTENSION_TRACKS } from '../../constants/trackings';
-import { withLoadingAsync } from '../../services/common-service';
+import { showToast, withLoadingAsync } from '../../services/common-service';
+import Input from '../../components/Input';
+import Button from '../../components/Button';
 
 const BLANK = '_blank';
+const RESOURCE_NAME = 'botAttendanceKey';
 
 const RouterScheduler = () => {
     // console.log('Router 🤖');
+    const { t } = useTranslation();
 
     const [application, setApplication] = useState({ shortName: 'init' });
-    const [subBots, setSubBots] = useState(null);
-    const [currentBot, setCurrentBot] = useState(null);
+    const [attendanceBotKey, setAttendanceBotkey] = useState(null);
+
+    const [canSelectTeams, setCanSelectTeams] = useState(false);
+
+    const [allTeams, setAllTeams] = useState(null);
+    const [currentTeam, setCurrentTeam] = useState(null);
+    const [currentWorkTime, setCurrentWorkTime] = useState(null);
 
     // Return current router data
-    // And get all sub bots from router
     useEffect(() => {
         withLoadingAsync(async () => {
             setApplication(await getApplicationDataAsync());
-            console.log(
-                await getBotDataAsync('atendimentohumano556@msging.net')
-            );
-            if (application.shortName !== 'init') {
-                setSubBots(await getAllowedSubbotsAsync(application));
-            }
             track(EXTENSION_TRACKS.open, {
                 botId: application.name
             });
         });
     }, [application.shortName]);
 
-    const getNewBot = (newBot) => {
-        // console.log(newBot);
-        setCurrentBot(newBot);
+    // check if exists an attendanceBotKey on resources
+    useEffect(() => {
+        withLoadingAsync(async () => {
+            if (attendanceBotKey === null) {
+                try {
+                    const resourceAttendanceBotKey = await getResourceAsync(
+                        RESOURCE_NAME
+                    );
+
+                    if (resourceAttendanceBotKey.key) {
+                        setAttendanceBotkey(resourceAttendanceBotKey.key);
+                        setCanSelectTeams(true);
+                    } else {
+                        setAttendanceBotkey('');
+                    }
+                } catch (error) {
+                    return {};
+                }
+            }
+        });
+    });
+
+    // save a new key into resources
+    const saveNewKey = async () => {
+        // check if the key is valid
+        if (!attendanceBotKey.startsWith('Key ')) {
+            showToast(ToastTypes.DANGER, 'Error', `Chave inválida`);
+            return false;
+        }
+
+        // change it to JSON
+        const attendanceBotKeyResource = {
+            key: attendanceBotKey
+        };
+
+        const response = await saveResourceAsync(
+            RESOURCE_NAME,
+            attendanceBotKeyResource
+        );
+
+        setCanSelectTeams(true);
+
+        if (response !== {}) {
+            showToast(
+                ToastTypes.SUCCESS,
+                'Sucesso',
+                `Chave do bot alterada com sucesso`
+            );
+        }
+    };
+
+    //
+    useEffect(() => {}, [canSelectTeams]);
+
+    const callback = (newTeam) => {
+        setCurrentTeam(newTeam);
+        setCurrentWorkTime(getNameOfWorkTime(newTeam));
+    };
+
+    const getNameOfWorkTime = (team) => {
+        if (team === 'Default') {
+            return 'workTime';
+        }
+
+        return `workTime-${team}`;
     };
 
     return (
@@ -66,14 +133,60 @@ const RouterScheduler = () => {
                             Bot de Atendimento Humano
                         </BdsTypo>
                         <BdsTypo style={{ color: '#3A4A65' }} variant="fs-15">
-                            Selecione o bot que você usa para atendimento
-                            humano.
+                            Insira a chave do seu bot de atendimento humano
+                            abaixo.
                         </BdsTypo>
                     </div>
 
-                    {/* Bot selector */}
-                    <SelectBot parentCallback={getNewBot} subBots={subBots} />
+                    {/* Inserting attendance bot key */}
+                    <div className="flex">
+                        <div className="w-80 pr3">
+                            <Input
+                                name="attendanceBotKey"
+                                icon="robot"
+                                placeholder="Key XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+                                value={attendanceBotKey}
+                                onChange={(e) => {
+                                    setAttendanceBotkey(e.target.value);
+                                }}
+                            />
+                        </div>
+                        <div>
+                            <Button
+                                text={t('labels.save')}
+                                icon="save-disk"
+                                variant="primary"
+                                arrow={false}
+                                disabled={false}
+                                onClick={() => {
+                                    saveNewKey(attendanceBotKey);
+                                }}
+                            />
+                        </div>
+                    </div>
                 </BdsPaper>
+
+                <div>
+                    {canSelectTeams === true ? (
+                        // Team selection container
+                        <BdsPaper className="pa4 mt4">
+                            <BdsTypo
+                                style={{ color: '#3A4A65' }}
+                                margin={5}
+                                variant="fs-24"
+                                bold="bold"
+                            >
+                                Selecione a equipe
+                            </BdsTypo>
+                            <SelectTeam
+                                parentCallback={callback}
+                                allTeams={allTeams}
+                            />
+                        </BdsPaper>
+                    ) : (
+                        ''
+                    )}
+                </div>
             </div>
         </>
     );

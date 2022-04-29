@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 // eslint-disable-next-line import/named
@@ -52,10 +53,6 @@ const BuilderScheduler = () => {
                 }
             }
         });
-
-        setTimeout(() => {
-            console.log('you can see me after 2 seconds');
-        }, 5000);
     });
 
     // Get work schedule info of a team
