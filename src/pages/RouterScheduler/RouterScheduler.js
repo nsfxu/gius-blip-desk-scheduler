@@ -13,6 +13,7 @@ import {
     getResourceAsync,
     saveResourceAsync
 } from '../../services/resources-service';
+import { getAllTeams } from '../../services/api-service';
 import { track } from '../../services/analytics-service';
 import { EXTENSION_TRACKS } from '../../constants/trackings';
 import { showToast, withLoadingAsync } from '../../services/common-service';
@@ -23,13 +24,10 @@ const BLANK = '_blank';
 const RESOURCE_NAME = 'botAttendanceKey';
 
 const RouterScheduler = () => {
-    // console.log('Router 🤖');
     const { t } = useTranslation();
 
     const [application, setApplication] = useState({ shortName: 'init' });
     const [attendanceBotKey, setAttendanceBotkey] = useState(null);
-
-    const [canSelectTeams, setCanSelectTeams] = useState(false);
 
     const [allTeams, setAllTeams] = useState(null);
     const [currentTeam, setCurrentTeam] = useState(null);
@@ -56,7 +54,7 @@ const RouterScheduler = () => {
 
                     if (resourceAttendanceBotKey.key) {
                         setAttendanceBotkey(resourceAttendanceBotKey.key);
-                        setCanSelectTeams(true);
+                        RequestAllTeams(resourceAttendanceBotKey.key);
                     } else {
                         setAttendanceBotkey('');
                     }
@@ -67,38 +65,93 @@ const RouterScheduler = () => {
         });
     });
 
+    // ==================================
+    // #region attendanceBotKey functions
+    // ==================================
+
     // save a new key into resources
+
     const saveNewKey = async () => {
-        // check if the key is valid
-        if (!attendanceBotKey.startsWith('Key ')) {
-            showToast(ToastTypes.DANGER, 'Error', `Chave inválida`);
-            return false;
-        }
+        withLoadingAsync(async () => {
+            // check if the key is valid
+            if (
+                !attendanceBotKey.startsWith('Key ') ||
+                attendanceBotKey.length < 40
+            ) {
+                hideTeamsSelector();
+                showToast(
+                    ToastTypes.DANGER,
+                    'Error',
+                    `A chave desse bot é inválida`
+                );
 
-        // change it to JSON
-        const attendanceBotKeyResource = {
-            key: attendanceBotKey
-        };
+                return false;
+            }
 
-        const response = await saveResourceAsync(
-            RESOURCE_NAME,
-            attendanceBotKeyResource
-        );
+            // change it to JSON
+            const attendanceBotKeyResource = {
+                key: attendanceBotKey
+            };
 
-        setCanSelectTeams(true);
-
-        if (response !== {}) {
-            showToast(
-                ToastTypes.SUCCESS,
-                'Sucesso',
-                `Chave do bot alterada com sucesso`
+            const response = await saveResourceAsync(
+                RESOURCE_NAME,
+                attendanceBotKeyResource
             );
-        }
+
+            RequestAllTeams(attendanceBotKey);
+
+            if (response !== {}) {
+                showToast(
+                    ToastTypes.SUCCESS,
+                    'Sucesso',
+                    `Chave do bot alterada com sucesso`
+                );
+            }
+        });
     };
 
-    //
-    useEffect(() => {}, [canSelectTeams]);
+    // request via HTTP #get-all-teams with the current attendanceBotKey
+    const RequestAllTeams = (botKey) => {
+        withLoadingAsync(async () => {
+            if (botKey !== null) {
+                try {
+                    const response = await getAllTeams(botKey);
 
+                    // send a error messsage
+                    // causes: The authorization key is invalid
+                    if (response === false) {
+                        // hide team selector component
+
+                        showToast(
+                            ToastTypes.DANGER,
+                            'Erro',
+                            `Não foi possível buscar as equipes com a chave inserida`
+                        );
+                    }
+
+                    if (response.data.resource) {
+                        hideTeamsSelector();
+
+                        setAllTeams(response.data.resource);
+                    }
+                } catch (error) {
+                    return error;
+                }
+            }
+        });
+    };
+
+    const hideTeamsSelector = () => {
+        setAllTeams(null);
+    };
+
+    // #endregion
+
+    // ==================================
+    // #region team selection functions
+    // ==================================
+
+    // receive response from input selector of teams
     const callback = (newTeam) => {
         setCurrentTeam(newTeam);
         setCurrentWorkTime(getNameOfWorkTime(newTeam));
@@ -111,6 +164,8 @@ const RouterScheduler = () => {
 
         return `workTime-${team}`;
     };
+
+    // #endregion
 
     return (
         <>
@@ -167,7 +222,7 @@ const RouterScheduler = () => {
                 </BdsPaper>
 
                 <div>
-                    {canSelectTeams === true ? (
+                    {allTeams !== null ? (
                         // Team selection container
                         <BdsPaper className="pa4 mt4">
                             <BdsTypo
