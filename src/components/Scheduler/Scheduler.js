@@ -79,10 +79,6 @@ const Scheduler = ({ currentResources, currentWorkTime, currentTeam }) => {
         }
     };
 
-    const removeAnyDuplicates = (newTimes) => {
-        return Array.from(new Set(newTimes.noWorkDays));
-    };
-
     const removeDayOff = (index) => {
         const newVal = { ...times };
         newVal.noWorkDays.splice(index, 1);

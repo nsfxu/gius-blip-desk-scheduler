@@ -1,4 +1,5 @@
 import React from 'react';
+
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import Button from '../Button';
@@ -18,14 +19,17 @@ const DayOff = ({
             justifyContent: 'start'
         }
     };
+
     return (
         <div data-testid="day-off">
             {noWorkDays.map((element, index) => (
                 <div key={index} style={styles.daysOffGroup} className="pb1">
                     <Input
+                        type="text"
                         name="start"
                         placeholder="MM-DD"
                         icon="calendar"
+                        maxLength={5}
                         value={element}
                         onChange={(event) => {
                             changeDayOff(index, event);

@@ -6,8 +6,8 @@ Validar:
     * Router  feito
     * Builder pendente
 - Validação de campos
-    * Horário pendente
-    * Data    pendente  
+    * Horário OK
+    * Data    +-  
 - Inserir horário de intervalo no botão ( + NOVO )
 - Trocar "Default" por "Todas as equipes"
 
