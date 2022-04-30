@@ -9,6 +9,7 @@ Validar:
     * Horário pendente
     * Data    pendente  
 - Inserir horário de intervalo no botão ( + NOVO )
+- Trocar "Default" por "Todas as equipes"
 
 Erros:
 - Se você deletar os feriados rapidamente, o plugin cria duplicadas

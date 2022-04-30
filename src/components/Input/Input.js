@@ -11,6 +11,7 @@ const Input = ({
     value,
     helperMessage,
     errorMessage,
+    type,
     minLength,
     maxLength,
     dataTestId = 'bds-input',
@@ -77,6 +78,7 @@ const Input = ({
                 helper-message={helperMessage}
                 danger={!!error || danger}
                 error-message={error || errorMessage}
+                type={!type ? 'text' : type}
                 minlength={minLength}
                 maxlength={maxLength}
                 cols={textareaCols}
@@ -96,6 +98,7 @@ Input.propTypes = {
     dataTestId: PropTypes.string,
     helperMessage: PropTypes.string,
     errorMessage: PropTypes.string,
+    type: PropTypes.string,
     minLength: PropTypes.number,
     maxLength: PropTypes.number,
     danger: PropTypes.bool,

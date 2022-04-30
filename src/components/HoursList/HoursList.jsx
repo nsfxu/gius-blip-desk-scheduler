@@ -20,9 +20,10 @@ const HoursList = ({
                 <div key={index}>
                     <Input
                         name="start"
+                        type="time"
                         label={t('labels.start')}
+                        maxLength={5}
                         placeholder="HH:MM"
-                        icon="clock"
                         value={element.start}
                         dataTestId={`ipt-change-start-work-time-${index}-${indexHour}`}
                         onChange={(event) => {
@@ -31,9 +32,9 @@ const HoursList = ({
                     />
                     <Input
                         name="start"
+                        type="time"
                         label={t('labels.end')}
                         placeholder="HH:MM"
-                        icon="clock"
                         value={element.end}
                         onChange={(event) => {
                             changeEnd(index, indexHour, event);

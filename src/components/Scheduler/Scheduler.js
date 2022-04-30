@@ -28,6 +28,7 @@ const Scheduler = ({ currentResources, currentWorkTime, currentTeam }) => {
     const styles = {
         weekContainer: {
             display: 'flex',
+            width: '100%',
             justifyContent: 'space-around'
         }
     };

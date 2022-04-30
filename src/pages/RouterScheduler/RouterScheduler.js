@@ -140,33 +140,31 @@ const RouterScheduler = () => {
     };
 
     // request via HTTP #get-all-teams with the current attendanceBotKey
-    const RequestAllTeams = (botKey) => {
-        withLoadingAsync(async () => {
-            if (botKey !== null) {
-                try {
-                    const response = await getAllTeams(botKey);
+    const RequestAllTeams = async (botKey) => {
+        if (botKey !== null) {
+            try {
+                const response = await getAllTeams(botKey);
 
-                    // send a error messsage
-                    // causes: The authorization key is invalid
-                    if (response === false) {
-                        // hide team selector component
+                // send a error messsage
+                // causes: The authorization key is invalid
+                if (response === false) {
+                    // hide team selector component
 
-                        showToast(
-                            ToastTypes.DANGER,
-                            'Erro',
-                            `Não foi possível buscar as equipes com a chave inserida.`
-                        );
-                    }
-
-                    if (response.data.resource) {
-                        hideTeamsSelector();
-                        setAllTeams(response.data.resource);
-                    }
-                } catch (error) {
-                    return error;
+                    showToast(
+                        ToastTypes.DANGER,
+                        'Erro',
+                        `Não foi possível buscar as equipes com a chave inserida.`
+                    );
                 }
+
+                if (response.data.resource) {
+                    hideTeamsSelector();
+                    setAllTeams(response.data.resource);
+                }
+            } catch (error) {
+                return error;
             }
-        });
+        }
     };
 
     const hideTeamsSelector = () => {
@@ -206,7 +204,6 @@ const RouterScheduler = () => {
                 {/* Bot selector */}
                 <BdsPaper className="pa4 mt4">
                     {/* Title container */}
-
                     <div className="pb4 mb4 bb bw1 bp-bc-neutral-medium-wave">
                         <BdsTypo
                             style={{ color: '#3A4A65' }}
