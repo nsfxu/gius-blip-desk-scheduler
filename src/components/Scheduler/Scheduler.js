@@ -38,6 +38,7 @@ const Scheduler = ({ currentResources, currentWorkTime, currentTeam }) => {
         withLoadingAsync(async () => {
             try {
                 if (currentResources.weekdays && currentResources.noWorkDays) {
+                    await setTimes(null);
                     handleChangeTimes(currentResources);
                 } else {
                     withLoadingAsync(() => {
@@ -79,10 +80,10 @@ const Scheduler = ({ currentResources, currentWorkTime, currentTeam }) => {
         }
     };
 
-    const removeDayOff = (index) => {
+    const removeDayOff = async (index) => {
         const newVal = { ...times };
         newVal.noWorkDays.splice(index, 1);
-        handleChangeTimes(newVal);
+        await handleChangeTimes(newVal);
     };
 
     const removeWorkTime = (indexWeek, indexHour) => {
