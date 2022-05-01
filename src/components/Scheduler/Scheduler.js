@@ -41,9 +41,7 @@ const Scheduler = ({ currentResources, currentWorkTime, currentTeam }) => {
                     await setTimes(null);
                     handleChangeTimes(currentResources);
                 } else {
-                    withLoadingAsync(() => {
-                        handleChangeTimes(DEFAULT_TIME);
-                    });
+                    handleChangeTimes(DEFAULT_TIME);
                 }
             } catch (error) {
                 return {};
@@ -58,6 +56,7 @@ const Scheduler = ({ currentResources, currentWorkTime, currentTeam }) => {
             val,
             STRONG_DAY_FORMAT_DEFAULT
         );
+
         setTimes({
             ...val,
             schedulerMessage

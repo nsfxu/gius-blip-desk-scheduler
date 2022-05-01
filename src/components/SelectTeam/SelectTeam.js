@@ -10,13 +10,6 @@ const SelectTeam = ({ parentCallback, allTeams }) => {
     const [selectedTeam, setSelectedTeam] = useState('');
     const { t } = useTranslation();
 
-    const getFirstTeam = (response) => {
-        if (response.total > 0) {
-            const TEAM_NAME = response.items[0].name;
-            setAsSelected(TEAM_NAME);
-        }
-    };
-
     const setAsSelected = (team) => {
         setSelectedTeam(team);
         parentCallback(team);
@@ -24,28 +17,20 @@ const SelectTeam = ({ parentCallback, allTeams }) => {
 
     useEffect(() => {
         if (allTeams != null) {
-            getFirstTeam(allTeams);
+            setAsSelected('Todos');
         }
     }, [allTeams]);
 
-    if (allTeams != null) {
-        if (allTeams.total === 1) {
-            return (
-                <>
-                    <BdsSelect value={selectedTeam} className="w-25">
-                        <BdsSelectOption
-                            value={selectedTeam}
-                            onClick={() => setAsSelected(selectedTeam)}
-                        >
-                            {selectedTeam}
-                        </BdsSelectOption>
-                    </BdsSelect>
-                </>
-            );
-        }
+    if (allTeams !== null) {
         return (
             <>
                 <BdsSelect value={selectedTeam} className="w-25">
+                    <BdsSelectOption
+                        value="Todos"
+                        onClick={() => setAsSelected('Todos')}
+                    >
+                        Todas as equipes
+                    </BdsSelectOption>
                     {allTeams.items?.map((value, key) => (
                         <BdsSelectOption
                             key={key}

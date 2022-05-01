@@ -67,5 +67,5 @@ export const DEFAULT_TIME = {
         '12-25',
         '12-31'
     ],
-    schedulerMessage: 'olá'
+    schedulerMessage: 'Segunda a Sexta: 09h00 às 19h00'
 };

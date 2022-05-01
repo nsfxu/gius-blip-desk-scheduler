@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 // eslint-disable-next-line import/named
 
-import { BdsPaper, BdsTypo } from 'blip-ds/dist/blip-ds-react';
+import { BdsPaper } from 'blip-ds/dist/blip-ds-react';
 import Header from '../../components/Header';
 import SelectTeam from '../../components/SelectTeam/SelectTeam';
 import Scheduler from '../../components/Scheduler/Scheduler';
@@ -96,7 +96,7 @@ const BuilderScheduler = () => {
     };
 
     const getNameOfWorkTime = (team) => {
-        if (team === 'Default') {
+        if (team === 'Todos') {
             return 'workTime';
         }
 
@@ -113,15 +113,36 @@ const BuilderScheduler = () => {
 
                 {/* Team selector */}
                 <BdsPaper className="pa4 mt4">
-                    <BdsTypo
-                        style={{ color: '#3A4A65' }}
-                        margin={5}
-                        variant="fs-24"
-                        bold="bold"
-                    >
-                        Selecione a equipe
-                    </BdsTypo>
-                    <SelectTeam parentCallback={callback} allTeams={allTeams} />
+                    <div className="pb4 mb4 bb bw1 bp-bc-neutral-medium-wave">
+                        <bds-typo
+                            style={{ color: '#3A4A65' }}
+                            margin={0}
+                            variant="fs-24"
+                            bold="bold"
+                        >
+                            Selecione a equipe
+                        </bds-typo>
+
+                        <bds-typo style={{ color: '#3A4A65' }} variant="fs-15">
+                            Obs.: Só apareceram as equipes que tiverem pelo
+                            menos um atendente atrelado.
+                        </bds-typo>
+                    </div>
+                    {allTeams !== null ? (
+                        <SelectTeam
+                            parentCallback={callback}
+                            allTeams={allTeams}
+                        />
+                    ) : (
+                        <bds-select value="Todos" className="w-25">
+                            <bds-select-option
+                                value="Todos"
+                                onClick={() => callback('Todos')}
+                            >
+                                Todas as equipes
+                            </bds-select-option>
+                        </bds-select>
+                    )}
                 </BdsPaper>
 
                 {/* Scheduler options */}
@@ -133,7 +154,7 @@ const BuilderScheduler = () => {
                             currentTeam={currentTeam}
                         />
                     ) : (
-                        <p>{t('loading')}</p>
+                        ''
                     )}
                 </div>
             </div>

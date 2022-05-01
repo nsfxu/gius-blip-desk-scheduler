@@ -2,7 +2,13 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { BdsPaper, BdsTypo } from 'blip-ds/dist/blip-ds-react';
+import {
+    BdsPaper,
+    BdsTypo,
+    BdsSelect,
+    BdsSelectOption
+} from 'blip-ds/dist/blip-ds-react';
+
 import Header from '../../components/Header';
 import SelectTeam from '../../components/SelectTeam/SelectTeam';
 import Scheduler from '../../components/Scheduler/Scheduler';
@@ -59,7 +65,7 @@ const RouterScheduler = () => {
                         setAttendanceBotkey(resourceAttendanceBotKey.key);
                         RequestAllTeams(resourceAttendanceBotKey.key);
                     } else {
-                        setAttendanceBotkey('');
+                        setAttendanceBotkey(null);
                     }
                 } catch (error) {
                     return {};
@@ -107,7 +113,7 @@ const RouterScheduler = () => {
                 !attendanceBotKey.startsWith('Key ') ||
                 attendanceBotKey.length < 40
             ) {
-                hideTeamsSelector();
+                hideOptions();
                 showToast(
                     ToastTypes.DANGER,
                     'Error',
@@ -141,34 +147,35 @@ const RouterScheduler = () => {
 
     // request via HTTP #get-all-teams with the current attendanceBotKey
     const RequestAllTeams = async (botKey) => {
-        if (botKey !== null) {
-            try {
-                const response = await getAllTeams(botKey);
+        withLoadingAsync(async () => {
+            if (botKey !== null) {
+                try {
+                    const response = await getAllTeams(botKey);
 
-                // send a error messsage
-                // causes: The authorization key is invalid
-                if (response === false) {
-                    // hide team selector component
+                    // send a error messsage
+                    // causes: The authorization key is invalid
+                    if (response === 401) {
+                        showToast(
+                            ToastTypes.DANGER,
+                            'Erro',
+                            `Não foi possível buscar as equipes com a chave inserida.`
+                        );
+                    }
 
-                    showToast(
-                        ToastTypes.DANGER,
-                        'Erro',
-                        `Não foi possível buscar as equipes com a chave inserida.`
-                    );
+                    if (response.data.resource) {
+                        hideOptions();
+                        setAllTeams(response.data.resource);
+                    }
+                } catch (error) {
+                    return error;
                 }
-
-                if (response.data.resource) {
-                    hideTeamsSelector();
-                    setAllTeams(response.data.resource);
-                }
-            } catch (error) {
-                return error;
             }
-        }
+        });
     };
 
-    const hideTeamsSelector = () => {
+    const hideOptions = () => {
         setAllTeams(null);
+        setCurrentResources(null);
     };
 
     // #endregion
@@ -184,7 +191,7 @@ const RouterScheduler = () => {
     };
 
     const getNameOfWorkTime = (team) => {
-        if (team === 'Default') {
+        if (team === 'Todos') {
             return 'workTime';
         }
 
@@ -248,9 +255,8 @@ const RouterScheduler = () => {
                 </BdsPaper>
 
                 {/* Team selector */}
-                <div>
-                    {allTeams !== null ? (
-                        // Team selection container
+                {!!allTeams ? (
+                    <div>
                         <BdsPaper className="pa4 mt4">
                             <div className="pb4 mb4 bb bw1 bp-bc-neutral-medium-wave">
                                 <bds-typo
@@ -270,15 +276,26 @@ const RouterScheduler = () => {
                                     pelo menos um atendente atrelado.
                                 </bds-typo>
                             </div>
-                            <SelectTeam
-                                parentCallback={callback}
-                                allTeams={allTeams}
-                            />
+                            {allTeams !== null ? (
+                                <SelectTeam
+                                    parentCallback={callback}
+                                    allTeams={allTeams}
+                                />
+                            ) : (
+                                <BdsSelect value="Todos" className="w-25">
+                                    <BdsSelectOption
+                                        value="Todos"
+                                        onClick={() => callback('Todos')}
+                                    >
+                                        Todas as equipes
+                                    </BdsSelectOption>
+                                </BdsSelect>
+                            )}
                         </BdsPaper>
-                    ) : (
-                        ''
-                    )}
-                </div>
+                    </div>
+                ) : (
+                    ''
+                )}
 
                 {/* Scheduler options */}
                 <div>
