@@ -24,8 +24,8 @@ const getAllTeams = async (attendanceBotKey) => {
     try {
         const response = await api.post(COMMANDS_URI, body, config);
         return response;
-    } catch (_) {
-        return false;
+    } catch (error) {
+        return error.response.status;
     }
 };
 
