@@ -47,6 +47,9 @@ export const buildSchedulerMessage = (val, strongDayFormat) => {
         }
     }
 
+    // remove the last 2 "\n"
+    message = message.substring(0, message.length - 2);
+
     return message;
 };
 
