@@ -37,7 +37,7 @@ const RouterScheduler = () => {
     const [application, setApplication] = useState({ shortName: 'init' });
     const [attendanceBotKey, setAttendanceBotkey] = useState(null);
 
-    const [allTeams, setAllTeams] = useState(null);
+    const [allTeams, setAllTeams] = useState(undefined);
     const [currentTeam, setCurrentTeam] = useState(null);
     const [currentWorkTime, setCurrentWorkTime] = useState(null);
     const [currentResources, setCurrentResources] = useState(null);
@@ -105,7 +105,6 @@ const RouterScheduler = () => {
     // ==================================
 
     // save a new key into resources
-
     const saveNewKey = async () => {
         withLoadingAsync(async () => {
             // check if the key is valid
@@ -145,6 +144,17 @@ const RouterScheduler = () => {
         });
     };
 
+    const hideOptions = () => {
+        setAllTeams(null);
+        setCurrentResources(null);
+    };
+
+    // #endregion
+
+    // ==================================
+    // #region team selection functions
+    // ==================================
+
     // request via HTTP #get-all-teams with the current attendanceBotKey
     const RequestAllTeams = async (botKey) => {
         withLoadingAsync(async () => {
@@ -166,23 +176,16 @@ const RouterScheduler = () => {
                         hideOptions();
                         setAllTeams(response.data.resource);
                     }
+
+                    setAllTeams(null);
+                    setCurrentTeam('Todos');
+                    setCurrentWorkTime(getNameOfWorkTime('Todos'));
                 } catch (error) {
                     return error;
                 }
             }
         });
     };
-
-    const hideOptions = () => {
-        setAllTeams(null);
-        setCurrentResources(null);
-    };
-
-    // #endregion
-
-    // ==================================
-    // #region team selection functions
-    // ==================================
 
     // receive response from input selector of teams
     const callback = (newTeam) => {
@@ -255,7 +258,7 @@ const RouterScheduler = () => {
                 </BdsPaper>
 
                 {/* Team selector */}
-                {!!allTeams ? (
+                {allTeams !== undefined ? (
                     <div>
                         <BdsPaper className="pa4 mt4">
                             <div className="pb4 mb4 bb bw1 bp-bc-neutral-medium-wave">

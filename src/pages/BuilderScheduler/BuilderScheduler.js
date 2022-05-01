@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 // eslint-disable-next-line import/named
 
 import { BdsPaper } from 'blip-ds/dist/blip-ds-react';
@@ -26,7 +25,6 @@ const BuilderScheduler = () => {
     const [currentResources, setCurrentResources] = useState(null);
 
     const [application, setApplication] = useState({ shortName: 'init' });
-    const { t } = useTranslation();
 
     // Return current bot data
     useEffect(() => {
@@ -91,8 +89,8 @@ const BuilderScheduler = () => {
             return;
         }
 
-        setCurrentTeam('Default');
-        setCurrentWorkTime(getNameOfWorkTime('Default'));
+        setCurrentTeam('Todos');
+        setCurrentWorkTime(getNameOfWorkTime('Todos'));
     };
 
     const getNameOfWorkTime = (team) => {
