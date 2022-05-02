@@ -43,9 +43,8 @@ const BuilderScheduler = () => {
             if (allTeams == null) {
                 try {
                     setAllTeams(await getAllTeamsAsync());
-                    if (allTeams != null) {
-                        setFirstTeam(currentTeam);
-                    }
+                    setCurrentTeam('Todos');
+                    setCurrentWorkTime(getNameOfWorkTime('Todos'));
                 } catch (error) {
                     return {};
                 }
@@ -78,19 +77,6 @@ const BuilderScheduler = () => {
     const callback = (newTeam) => {
         setCurrentTeam(newTeam);
         setCurrentWorkTime(getNameOfWorkTime(newTeam));
-    };
-
-    const setFirstTeam = (response) => {
-        if (response.total > 0) {
-            const TEAM_NAME = response.items[0].name;
-
-            setCurrentTeam(TEAM_NAME);
-            setCurrentWorkTime(getNameOfWorkTime(TEAM_NAME));
-            return;
-        }
-
-        setCurrentTeam('Todos');
-        setCurrentWorkTime(getNameOfWorkTime('Todos'));
     };
 
     const getNameOfWorkTime = (team) => {
