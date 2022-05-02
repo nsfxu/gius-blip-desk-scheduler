@@ -52,10 +52,6 @@ const RouterScheduler = () => {
         });
     }, [application.shortName]);
 
-    useEffect(() => {
-        console.log(allTeams);
-    }, [allTeams]);
-
     // check if exists an attendanceBotKey on resources
     useEffect(() => {
         withLoadingAsync(async () => {
