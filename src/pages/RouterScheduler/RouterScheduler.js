@@ -52,6 +52,10 @@ const RouterScheduler = () => {
         });
     }, [application.shortName]);
 
+    useEffect(() => {
+        console.log(allTeams);
+    }, [allTeams]);
+
     // check if exists an attendanceBotKey on resources
     useEffect(() => {
         withLoadingAsync(async () => {
@@ -175,11 +179,11 @@ const RouterScheduler = () => {
                     if (response.data.resource) {
                         hideOptions();
                         setAllTeams(response.data.resource);
+                    } else {
+                        setAllTeams(null);
+                        setCurrentTeam('Todos');
+                        setCurrentWorkTime(getNameOfWorkTime('Todos'));
                     }
-
-                    setAllTeams(null);
-                    setCurrentTeam('Todos');
-                    setCurrentWorkTime(getNameOfWorkTime('Todos'));
                 } catch (error) {
                     return error;
                 }
