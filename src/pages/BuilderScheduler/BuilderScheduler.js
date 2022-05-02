@@ -84,6 +84,11 @@ const BuilderScheduler = () => {
             return 'workTime';
         }
 
+        // change all spaces for underlines
+        if (team.indexOf(' ') !== -1) {
+            return `workTime-${team.replaceAll(' ', '_')}`;
+        }
+
         return `workTime-${team}`;
     };
 
