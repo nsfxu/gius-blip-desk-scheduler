@@ -24,7 +24,11 @@ const SelectTeam = ({ parentCallback, allTeams }) => {
     if (allTeams !== null) {
         return (
             <>
-                <BdsSelect value={selectedTeam} className="w-25">
+                <BdsSelect
+                    value={selectedTeam}
+                    className="w-25"
+                    dataTestId="teamSelector"
+                >
                     <BdsSelectOption
                         value="Todos"
                         onClick={() => setAsSelected('Todos')}

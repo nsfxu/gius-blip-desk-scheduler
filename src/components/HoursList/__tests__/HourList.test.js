@@ -1,8 +1,7 @@
 import React from 'react';
-import '@testing-library/jest-dom';
 
 import { render, screen, fireEvent } from '@testing-library/react';
-import { DEFAULT_TIME } from '../../../constants';
+import { DEFAULT_TIME } from '../../../constants/defaultTime';
 import HoursList from '..';
 
 describe('Day off', () => {
