@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
-// eslint-disable-next-line import/named
 
 import Header from '../../components/Header';
 import SelectTeam from '../../components/SelectTeam/SelectTeam';

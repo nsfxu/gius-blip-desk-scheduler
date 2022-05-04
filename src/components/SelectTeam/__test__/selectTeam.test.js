@@ -1,5 +1,5 @@
 import React from 'react';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import SelectTeam from '../SelectTeam';
