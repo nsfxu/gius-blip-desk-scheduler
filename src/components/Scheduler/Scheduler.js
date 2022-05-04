@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { BdsPaper } from 'blip-ds/dist/blip-ds-react';
 import propTypes from 'prop-types';
 import ToastTypes from '../../constants/toast-type';
 
@@ -149,69 +148,80 @@ const Scheduler = ({ currentResources, currentWorkTime, currentTeam }) => {
         return (
             <>
                 {/* Weeks container */}
-                <BdsPaper className="pa4 mt4">
-                    <div className="pb4 mb4 bb bw1 bp-bc-neutral-medium-wave">
-                        <bds-typo
-                            style={{ color: '#3A4A65' }}
-                            margin={0}
-                            variant="fs-24"
-                            bold="bold"
-                        >
-                            Horários de atendimento - {currentTeam}
-                        </bds-typo>
+                <bds-paper>
+                    <div className="mt4 pa4">
+                        <div className="pb4 mb4 bb bw1 bp-bc-neutral-medium-wave">
+                            <bds-typo
+                                style={{ color: '#3A4A65' }}
+                                margin={0}
+                                variant="fs-24"
+                                bold="bold"
+                            >
+                                Horários de atendimento - {currentTeam}
+                            </bds-typo>
 
-                        <bds-typo style={{ color: '#3A4A65' }} variant="fs-15">
-                            Preencha os horários de atendimento conforme os dias
-                            da semana. Obs.: Você pode adicionar mais de um
-                            intervalo de horário por dia.
-                        </bds-typo>
+                            <bds-typo
+                                style={{ color: '#3A4A65' }}
+                                variant="fs-15"
+                            >
+                                Preencha os horários de atendimento conforme os
+                                dias da semana. Obs.: Você pode adicionar mais
+                                de um intervalo de horário por dia.
+                            </bds-typo>
+                        </div>
+                        <div style={styles.weekContainer}>
+                            <ListWeek
+                                times={times}
+                                changeStart={changeStart}
+                                changeEnd={changeEnd}
+                                removeWorkTime={removeWorkTime}
+                                addWorkTime={addWorkTime}
+                            />
+                        </div>
                     </div>
-                    <div style={styles.weekContainer}>
-                        <ListWeek
-                            times={times}
-                            changeStart={changeStart}
-                            changeEnd={changeEnd}
-                            removeWorkTime={removeWorkTime}
-                            addWorkTime={addWorkTime}
-                        />
-                    </div>
-                </BdsPaper>
+                </bds-paper>
 
                 {/* No work days container */}
-                <BdsPaper className="pa4 mt4">
-                    <div className="pb4 mb4 bb bw1 bp-bc-neutral-medium-wave">
-                        <bds-typo
-                            style={{ color: '#3A4A65' }}
-                            margin={0}
-                            variant="fs-24"
-                            bold="bold"
-                        >
-                            Dias sem atendimento - {currentTeam}
-                        </bds-typo>
+                <bds-paper>
+                    <div className="pa4 mt4">
+                        <div className="pb4 mb4 bb bw1 bp-bc-neutral-medium-wave">
+                            <bds-typo
+                                style={{ color: '#3A4A65' }}
+                                margin={0}
+                                variant="fs-24"
+                                bold="bold"
+                            >
+                                Dias sem atendimento - {currentTeam}
+                            </bds-typo>
 
-                        <bds-typo style={{ color: '#3A4A65' }} variant="fs-15">
-                            Preencha abaixo os dias que não haverão atendimento.
-                        </bds-typo>
+                            <bds-typo
+                                style={{ color: '#3A4A65' }}
+                                variant="fs-15"
+                            >
+                                Preencha abaixo os dias que não haverão
+                                atendimento.
+                            </bds-typo>
+                        </div>
+                        <div className="pb3">
+                            <DayOff
+                                noWorkDays={times.noWorkDays}
+                                changeDayOff={changeDayOff}
+                                removeDayOff={removeDayOff}
+                                addDayOff={addDayOff}
+                            />
+                        </div>
+                        <div className="w1">
+                            <Button
+                                text={t('labels.save')}
+                                icon="save-disk"
+                                variant="primary"
+                                arrow={false}
+                                disabled={false}
+                                onClick={saveAsync}
+                            />
+                        </div>
                     </div>
-                    <div className="pb3">
-                        <DayOff
-                            noWorkDays={times.noWorkDays}
-                            changeDayOff={changeDayOff}
-                            removeDayOff={removeDayOff}
-                            addDayOff={addDayOff}
-                        />
-                    </div>
-                    <div className="w1">
-                        <Button
-                            text={t('labels.save')}
-                            icon="save-disk"
-                            variant="primary"
-                            arrow={false}
-                            disabled={false}
-                            onClick={saveAsync}
-                        />
-                    </div>
-                </BdsPaper>
+                </bds-paper>
             </>
         );
     }

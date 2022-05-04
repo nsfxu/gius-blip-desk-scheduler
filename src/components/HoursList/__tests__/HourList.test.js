@@ -27,13 +27,13 @@ describe('Day off', () => {
     });
 
     it('should render correctly', () => {
-        expect(screen.queryByTestId('btn-add-work-time-1')).toBeInTheDocument();
+        expect(screen.queryByTestId('btn-add-work-time-1')).toBeInTheDocument;
         expect(
             screen.queryByTestId('btn-remove-work-time-1-0')
-        ).toBeInTheDocument();
+        ).toBeInTheDocument;
         expect(
             screen.queryByTestId('ipt-change-start-work-time-1-0')
-        ).toBeInTheDocument();
+        ).toBeInTheDocument;
     });
 
     it('should handle click add work time event', () => {
