@@ -45,7 +45,11 @@ const Home = () => {
         return application?.template === ROUTER_TEMPLATE;
     };
 
-    return <h1>{t('loading')}</h1>;
+    return (
+        <h1>
+            {t('loading')} {!!application ? application.template : ''}
+        </h1>
+    );
 };
 
 export default Home;
