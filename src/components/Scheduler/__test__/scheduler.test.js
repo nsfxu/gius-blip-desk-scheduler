@@ -1,9 +1,6 @@
 import React from 'react';
 import { act, render, screen } from '@testing-library/react';
-<<<<<<< HEAD
 import '@testing-library/jest-dom/extend-expect';
-=======
->>>>>>> f01e5161f41a53d74dd65b5710e50a16abffe2e0
 
 import Scheduler from '../Scheduler';
 
@@ -84,11 +81,7 @@ describe('Scheduler', () => {
 
     const mockCurrentTeam = 'Todos';
 
-<<<<<<< HEAD
     it('should render the two main containers', async () => {
-=======
-    it('should render correctly', async () => {
->>>>>>> f01e5161f41a53d74dd65b5710e50a16abffe2e0
         await act(async () => {
             render(
                 <Scheduler
@@ -99,13 +92,8 @@ describe('Scheduler', () => {
             );
         });
 
-<<<<<<< HEAD
         expect(screen.getByTestId('weeksContainer')).toBeInTheDocument();
         expect(screen.getByTestId('noWorkDaysContainer')).toBeInTheDocument();
-=======
-        const scheduler = screen;
-        expect(scheduler).toBeTruthy();
->>>>>>> f01e5161f41a53d74dd65b5710e50a16abffe2e0
     });
 
     it('should show a loading text if the resources are not ready', async () => {
@@ -119,13 +107,8 @@ describe('Scheduler', () => {
             );
         });
 
-<<<<<<< HEAD
         expect(
             screen.getByRole('heading', { name: /loading/i })
         ).toBeInTheDocument();
-=======
-        const loadingText = screen.getByRole('heading');
-        expect(loadingText).toBeTruthy();
->>>>>>> f01e5161f41a53d74dd65b5710e50a16abffe2e0
     });
 });

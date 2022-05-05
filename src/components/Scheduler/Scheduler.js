@@ -148,11 +148,7 @@ const Scheduler = ({ currentResources, currentWorkTime, currentTeam }) => {
         return (
             <>
                 {/* Weeks container */}
-<<<<<<< HEAD
                 <bds-paper data-testid="weeksContainer">
-=======
-                <bds-paper>
->>>>>>> f01e5161f41a53d74dd65b5710e50a16abffe2e0
                     <div className="mt4 pa4">
                         <div className="pb4 mb4 bb bw1 bp-bc-neutral-medium-wave">
                             <bds-typo
@@ -186,11 +182,7 @@ const Scheduler = ({ currentResources, currentWorkTime, currentTeam }) => {
                 </bds-paper>
 
                 {/* No work days container */}
-<<<<<<< HEAD
                 <bds-paper data-testid="noWorkDaysContainer">
-=======
-                <bds-paper>
->>>>>>> f01e5161f41a53d74dd65b5710e50a16abffe2e0
                     <div className="pa4 mt4">
                         <div className="pb4 mb4 bb bw1 bp-bc-neutral-medium-wave">
                             <bds-typo
