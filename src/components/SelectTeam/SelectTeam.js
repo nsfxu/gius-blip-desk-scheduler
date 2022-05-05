@@ -3,9 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import propTypes from 'prop-types';
 
-// eslint-disable-next-line import/named
-import { BdsSelect, BdsSelectOption } from 'blip-ds/dist/blip-ds-react';
-
 const SelectTeam = ({ parentCallback, allTeams }) => {
     const [selectedTeam, setSelectedTeam] = useState('');
     const { t } = useTranslation();
@@ -23,25 +20,25 @@ const SelectTeam = ({ parentCallback, allTeams }) => {
 
     if (allTeams !== null) {
         return (
-            <>
-                <BdsSelect value={selectedTeam} className="w-25">
-                    <BdsSelectOption
+            <div className="w-25">
+                <bds-select value={selectedTeam} data-testid="teamSelector">
+                    <bds-select-option
                         value="Todos"
                         onClick={() => setAsSelected('Todos')}
                     >
                         Todas as equipes
-                    </BdsSelectOption>
-                    {allTeams.items?.map((value, key) => (
-                        <BdsSelectOption
-                            key={key}
+                    </bds-select-option>
+                    {allTeams.items?.map((value) => (
+                        <bds-select-option
+                            key={value.name}
                             value={value.name}
                             onClick={() => setAsSelected(value.name)}
                         >
                             {value.name}
-                        </BdsSelectOption>
+                        </bds-select-option>
                     ))}
-                </BdsSelect>
-            </>
+                </bds-select>
+            </div>
         );
     }
 

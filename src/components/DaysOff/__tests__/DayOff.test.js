@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 
 import { render, screen, fireEvent } from '@testing-library/react';
 import DayOff from '../DayOff';
-import { DEFAULT_TIME } from '../../../constants';
+import { DEFAULT_TIME } from '../../../constants/defaultTime';
 
 describe('Day off', () => {
     const emptyFunction = jest.fn();

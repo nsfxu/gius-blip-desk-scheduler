@@ -2,13 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import {
-    BdsPaper,
-    BdsTypo,
-    BdsSelect,
-    BdsSelectOption
-} from 'blip-ds/dist/blip-ds-react';
-
 import Header from '../../components/Header';
 import SelectTeam from '../../components/SelectTeam/SelectTeam';
 import Scheduler from '../../components/Scheduler/Scheduler';
@@ -209,29 +202,29 @@ const RouterScheduler = () => {
     // #endregion
 
     return (
-        <>
-            <div className="ph1 ph4-m ph5-ns pb5">
-                <Header
-                    title="Blip desk scheduler"
-                    onClick={() => window.open(settings.repositoryUrl, BLANK)}
-                />
+        <div className="ph1 ph4-m ph5-ns pb5">
+            <Header
+                title="Blip desk scheduler"
+                onClick={() => window.open(settings.repositoryUrl, BLANK)}
+            />
 
-                {/* Bot selector */}
-                <BdsPaper className="pa4 mt4">
+            {/* Bot selector */}
+            <bds-paper>
+                <div className="pa4 mt4">
                     {/* Title container */}
                     <div className="pb4 mb4 bb bw1 bp-bc-neutral-medium-wave">
-                        <BdsTypo
+                        <bds-typo
                             style={{ color: '#3A4A65' }}
                             margin={5}
                             variant="fs-24"
                             bold="bold"
                         >
                             Bot de Atendimento Humano
-                        </BdsTypo>
-                        <BdsTypo style={{ color: '#3A4A65' }} variant="fs-15">
+                        </bds-typo>
+                        <bds-typo style={{ color: '#3A4A65' }} variant="fs-15">
                             Insira a chave do seu bot de atendimento humano
                             abaixo.
-                        </BdsTypo>
+                        </bds-typo>
                     </div>
 
                     {/* Inserting attendance bot key */}
@@ -260,12 +253,14 @@ const RouterScheduler = () => {
                             />
                         </div>
                     </div>
-                </BdsPaper>
+                </div>
+            </bds-paper>
 
-                {/* Team selector */}
-                {allTeams !== undefined ? (
-                    <div>
-                        <BdsPaper className="pa4 mt4">
+            {/* Team selector */}
+            {allTeams !== undefined ? (
+                <div>
+                    <bds-paper>
+                        <div className="pa4 mt4">
                             <div className="pb4 mb4 bb bw1 bp-bc-neutral-medium-wave">
                                 <bds-typo
                                     style={{ color: '#3A4A65' }}
@@ -290,35 +285,37 @@ const RouterScheduler = () => {
                                     allTeams={allTeams}
                                 />
                             ) : (
-                                <BdsSelect value="Todos" className="w-25">
-                                    <BdsSelectOption
-                                        value="Todos"
-                                        onClick={() => callback('Todos')}
-                                    >
-                                        Todas as equipes
-                                    </BdsSelectOption>
-                                </BdsSelect>
+                                <div className="w-25">
+                                    <bds-select value="Todos">
+                                        <bds-select-option
+                                            value="Todos"
+                                            onClick={() => callback('Todos')}
+                                        >
+                                            Todas as equipes
+                                        </bds-select-option>
+                                    </bds-select>
+                                </div>
                             )}
-                        </BdsPaper>
-                    </div>
+                        </div>
+                    </bds-paper>
+                </div>
+            ) : (
+                ''
+            )}
+
+            {/* Scheduler options */}
+            <div>
+                {currentResources !== null && currentWorkTime !== null ? (
+                    <Scheduler
+                        currentResources={currentResources}
+                        currentWorkTime={currentWorkTime}
+                        currentTeam={currentTeam}
+                    />
                 ) : (
                     ''
                 )}
-
-                {/* Scheduler options */}
-                <div>
-                    {currentResources !== null && currentWorkTime !== null ? (
-                        <Scheduler
-                            currentResources={currentResources}
-                            currentWorkTime={currentWorkTime}
-                            currentTeam={currentTeam}
-                        />
-                    ) : (
-                        ''
-                    )}
-                </div>
             </div>
-        </>
+        </div>
     );
 };
 

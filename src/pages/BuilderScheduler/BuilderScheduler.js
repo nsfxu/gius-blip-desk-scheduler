@@ -1,8 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
-// eslint-disable-next-line import/named
 
-import { BdsPaper } from 'blip-ds/dist/blip-ds-react';
 import Header from '../../components/Header';
 import SelectTeam from '../../components/SelectTeam/SelectTeam';
 import Scheduler from '../../components/Scheduler/Scheduler';
@@ -93,15 +91,15 @@ const BuilderScheduler = () => {
     };
 
     return (
-        <>
-            <div className="ph1 ph4-m ph5-ns pb5">
-                <Header
-                    title="Blip desk scheduler"
-                    onClick={() => window.open(settings.repositoryUrl, BLANK)}
-                />
+        <div className="ph1 ph4-m ph5-ns pb5">
+            <Header
+                title="Blip desk scheduler"
+                onClick={() => window.open(settings.repositoryUrl, BLANK)}
+            />
 
-                {/* Team selector */}
-                <BdsPaper className="pa4 mt4">
+            {/* Team selector */}
+            <bds-paper>
+                <div className="pa4 mt4">
                     <div className="pb4 mb4 bb bw1 bp-bc-neutral-medium-wave">
                         <bds-typo
                             style={{ color: '#3A4A65' }}
@@ -132,22 +130,22 @@ const BuilderScheduler = () => {
                             </bds-select-option>
                         </bds-select>
                     )}
-                </BdsPaper>
-
-                {/* Scheduler options */}
-                <div>
-                    {currentResources !== null && currentWorkTime !== null ? (
-                        <Scheduler
-                            currentResources={currentResources}
-                            currentWorkTime={currentWorkTime}
-                            currentTeam={currentTeam}
-                        />
-                    ) : (
-                        ''
-                    )}
                 </div>
+            </bds-paper>
+
+            {/* Scheduler options */}
+            <div>
+                {currentResources !== null && currentWorkTime !== null ? (
+                    <Scheduler
+                        currentResources={currentResources}
+                        currentWorkTime={currentWorkTime}
+                        currentTeam={currentTeam}
+                    />
+                ) : (
+                    ''
+                )}
             </div>
-        </>
+        </div>
     );
 };
 
