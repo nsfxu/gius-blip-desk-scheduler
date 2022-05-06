@@ -209,7 +209,7 @@ const RouterScheduler = () => {
             />
 
             {/* Bot selector */}
-            <bds-paper>
+            <bds-paper data-testid="botContainer">
                 <div className="pa4 mt4">
                     {/* Title container */}
                     <div className="pb4 mb4 bb bw1 bp-bc-neutral-medium-wave">
@@ -259,7 +259,7 @@ const RouterScheduler = () => {
             {/* Team selector */}
             {allTeams !== undefined ? (
                 <div>
-                    <bds-paper>
+                    <bds-paper data-testid="teamContainer">
                         <div className="pa4 mt4">
                             <div className="pb4 mb4 bb bw1 bp-bc-neutral-medium-wave">
                                 <bds-typo
@@ -310,6 +310,7 @@ const RouterScheduler = () => {
                         currentResources={currentResources}
                         currentWorkTime={currentWorkTime}
                         currentTeam={currentTeam}
+                        data-testid="schedulerContainer"
                     />
                 ) : (
                     ''
