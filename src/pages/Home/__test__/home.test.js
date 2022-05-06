@@ -16,6 +16,5 @@ describe('Home page', () => {
         );
 
         expect(homePage).toMatchSnapshot();
-        expect(history.location.pathname).toBe('/');
     });
 });
