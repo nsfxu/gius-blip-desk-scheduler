@@ -3,129 +3,128 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.21.1",
-    "blip-ds": "^1.150.1",
-    "blip-toolkit": "^5.23.0",
-    "classnames": "^2.3.1",
-    "date-fns": "^2.28.0",
-    "formik": "^2.2.9",
-    "history": "^5.3.0",
-    "i18next": "^20.6.1",
-    "iframe-message-proxy": "^1.2.0",
-    "jquery": "^3.6.0",
-    "lime-js": "^3.0.1",
-    "prop-types": "^15.8.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-i18next": "^11.16.7",
-    "react-router-dom": "^5.3.1",
-    "react-scripts": "^5.0.1",
-    "replace-in-file": "^6.3.2",
-    "resize-observer": "^1.0.4",
-    "sass": "^1.50.1",
-    "swr": "^0.5.7",
-    "tachyons": "^4.12.0",
-    "yup": "^0.32.11"
+      "axios": "^0.21.1",
+      "blip-ds": "^1.150.1",
+      "blip-toolkit": "^5.23.0",
+      "classnames": "^2.3.1",
+      "date-fns": "^2.28.0",
+      "formik": "^2.2.9",
+      "history": "^5.3.0",
+      "i18next": "^20.6.1",
+      "iframe-message-proxy": "^1.2.0",
+      "jquery": "^3.6.0",
+      "lime-js": "^3.0.1",
+      "prop-types": "^15.8.1",
+      "react": "^17.0.2",
+      "react-dom": "^17.0.2",
+      "react-i18next": "^11.16.7",
+      "react-router-dom": "^5.3.1",
+      "react-scripts": "^5.0.1",
+      "replace-in-file": "^6.3.2",
+      "resize-observer": "^1.0.4",
+      "sass": "^1.50.1",
+      "swr": "^0.5.7",
+      "tachyons": "^4.12.0",
+      "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "jest",
-    "eject": "react-scripts eject",
-    "config:plugin": "cross-env REACT_APP_NAME=$npm_package_name node src/config/scripts/plugin-config.js",
-    "test:watch": "yarn test -- --watch",
-    "test:coverage": "jest --coverage",
-    "test:clear": "jest --clearCache",
-    "format": "prettier --write src/**/*.{js,jsx,ts,tsx}",
-    "lint": "eslint src/**/*.{js,jsx,ts,tsx}"
+      "start": "react-scripts start",
+      "build": "react-scripts build",
+      "test": "jest",
+      "eject": "react-scripts eject",
+      "config:plugin": "cross-env REACT_APP_NAME=$npm_package_name node src/config/scripts/plugin-config.js",
+      "test:watch": "yarn test -- --watch",
+      "test:coverage": "jest --coverage",
+      "test:clear": "jest --clearCache",
+      "format": "prettier --write src/**/*.{js,jsx,ts,tsx}",
+      "lint": "eslint src/**/*.{js,jsx,ts,tsx}"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+      "extends": [
+          "react-app",
+          "react-app/jest"
+      ]
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+      "production": [
+          ">0.2%",
+          "not dead",
+          "not op_mini all"
+      ],
+      "development": [
+          "last 1 chrome version",
+          "last 1 firefox version",
+          "last 1 safari version"
+      ]
   },
   "jest": {
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,ts,tsx}",
-      "!**/node_modules/**"
-    ],
-    "coverageDirectory": "<rootDir>/coverage/",
-    "testResultsProcessor": "jest-sonar-reporter",
-    "testEnvironment": "jsdom",
-    "testTimeout": 30000,
-    "transform": {
-      "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
-      "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/src/config/jest/fileTransform.js"
-    },
-    "transformIgnorePatterns": [
-      "<rootDir>/node_modules/(?!blip-ds)",
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
-      "^.+\\.module\\.(css|sass|scss)$"
-    ],
-    "coveragePathIgnorePatterns": [
-      "<rootDir>/src/App.js",
-      "<rootDir>/src/index.js",
-      "<rootDir>/src/config/",
-      "<rootDir>/src/constants/",
-      "<rootDir>/src/translate/",
-      "<rootDir>/src/routes/"
-    ]
+      "collectCoverage": true,
+      "collectCoverageFrom": [
+          "src/**/*.{js,jsx,ts,tsx}",
+          "!**/node_modules/**"
+      ],
+      "coverageDirectory": "<rootDir>/coverage/",
+      "testResultsProcessor": "jest-sonar-reporter",
+      "testEnvironment": "jsdom",
+      "testTimeout": 30000,
+      "transform": {
+          "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
+          "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/src/config/jest/fileTransform.js"
+      },
+      "transformIgnorePatterns": [
+          "<rootDir>/node_modules/(?!blip-ds)",
+          "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
+          "^.+\\.module\\.(css|sass|scss)$"
+      ],
+      "coveragePathIgnorePatterns": [
+          "<rootDir>/src/App.js",
+          "<rootDir>/src/index.js",
+          "<rootDir>/src/config/",
+          "<rootDir>/src/constants/",
+          "<rootDir>/src/translate/",
+          "<rootDir>/src/routes/"
+      ]
   },
   "babel": {
-    "presets": [
-      "react-app"
-    ],
-    "env": {
-      "production": {
-        "plugins": [
-          [
-            "react-remove-properties",
-            {
-              "properties": [
-                "data-test",
-                "data-testid"
+      "presets": [
+          "react-app"
+      ],
+      "env": {
+          "production": {
+              "plugins": [
+                  [
+                      "react-remove-properties",
+                      {
+                          "properties": [
+                              "data-test",
+                              "data-testid"
+                          ]
+                      }
+                  ]
               ]
-            }
-          ]
-        ]
+          }
       }
-    }
   },
   "devDependencies": {
-    "@babel/core": "^7.17.9",
-    "@babel/eslint-parser": "^7.17.0",
-    "@babel/preset-env": "^7.16.11",
-    "@babel/preset-react": "^7.16.7",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^13.5.0",
-    "babel-plugin-react-remove-properties": "^0.3.0",
-    "cross-env": "^7.0.3",
-    "eslint": "^8.13.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.29.4",
-    "eslint-plugin-react-hooks": "^4.4.0",
-    "husky": "^7.0.4",
-    "jest-mock-axios": "^4.6.1",
-    "jest-sonar-reporter": "^2.0.0",
-    "prettier": "^2.6.2"
+      "@babel/preset-react": "^7.13.13",
+      "@testing-library/jest-dom": "^5.16.4",
+      "@testing-library/react": "^11.2.7",
+      "@testing-library/user-event": "^13.5.0",
+      "babel-plugin-react-remove-properties": "^0.3.0",
+      "cross-env": "^7.0.3",
+      "eslint": "^7.23.0",
+      "eslint-config-airbnb": "^18.2.1",
+      "eslint-config-airbnb-base": "^14.2.1",
+      "eslint-config-prettier": "^8.5.0",
+      "eslint-config-react-app": "^6.0.0",
+      "eslint-plugin-import": "^2.26.0",
+      "eslint-plugin-jsx-a11y": "^6.4.1",
+      "eslint-plugin-prettier": "^3.3.1",
+      "eslint-plugin-react": "^7.23.2",
+      "eslint-plugin-react-hooks": "^4.2.0",
+      "husky": "^7.0.4",
+      "jest-mock-axios": "^4.6.1",
+      "jest-sonar-reporter": "^2.0.0",
+      "prettier": "^2.6.2"
   }
 }
