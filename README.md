@@ -1,2 +1,2 @@
-# gius-blip-desk-scheduler-temp
-Repo temporário para o BDS
+TODO:
+- Fazer os testes unitários
