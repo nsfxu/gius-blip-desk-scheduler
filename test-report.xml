@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="D:\js\React\bds\src\constants\__tests__\constants.test.js">
+    <testCase name="Constants test ApplicationActions values" duration="2"/>
+    <testCase name="Constants test BlipPortalDestinations values" duration="1"/>
+    <testCase name="Constants test BlipPortalToastTypes values" duration="0"/>
+    <testCase name="Constants test CommonActions values" duration="1"/>
+    <testCase name="Constants test IframeMessageProxyActions values" duration="2"/>
+    <testCase name="Constants test CommonActions values" duration="2"/>
+    <testCase name="Constants test TrackingEvents values" duration="0"/>
+    <testCase name="Constants test UserActions values" duration="0"/>
+  </file>
+  <file path="D:\js\React\bds\src\components\Card\_tests_\card.test.js">
+    <testCase name="Card component should render correctly with default props" duration="165"/>
+    <testCase name="Card component should render correctly when remove props" duration="38"/>
+    <testCase name="Card component should handle click event" duration="18"/>
+    <testCase name="Card component should matches with snapshot" duration="9"/>
+  </file>
+  <file path="D:\js\React\bds\src\components\PageHeader\__tests__\pageHeader.test.js">
+    <testCase name="Page header component should render correctly" duration="123"/>
+    <testCase name="Page header component should handle click event" duration="7"/>
+    <testCase name="Page header component should matches with snapshot" duration="10"/>
+  </file>
+  <file path="D:\js\React\bds\src\components\SelectTeam\__test__\selectTeam.test.js">
+    <testCase name="Select team should render correctly" duration="23"/>
+    <testCase name="Select team should call parentCallback with Todos as a parameters" duration="14"/>
+  </file>
+  <file path="D:\js\React\bds\src\components\HoursList\__tests__\HourList.test.js">
+    <testCase name="Day off should render correctly" duration="34"/>
+    <testCase name="Day off should handle click add work time event" duration="13"/>
+    <testCase name="Day off should handle click remove work time event" duration="12"/>
+  </file>
+  <file path="D:\js\React\bds\src\components\Scheduler\__test__\scheduler.test.js">
+    <testCase name="Scheduler should render the two main containers" duration="140"/>
+    <testCase name="Scheduler should show a loading text if the resources are not ready" duration="56"/>
+  </file>
+  <file path="D:\js\React\bds\src\store\actions\__tests__\actions.test.js">
+    <testCase name="actions test Application" duration="3"/>
+    <testCase name="actions test User" duration="1"/>
+  </file>
+  <file path="D:\js\React\bds\src\components\Paper\__test__\paper.test.js">
+    <testCase name="Paper should render correctly" duration="53"/>
+    <testCase name="Paper should handle click event" duration="5"/>
+  </file>
+  <file path="D:\js\React\bds\src\components\Button\__tests__\button.test.js">
+    <testCase name="Button component should render correctly" duration="19"/>
+    <testCase name="Button component should handle click event" duration="15"/>
+    <testCase name="Button component should matches with snapshot" duration="13"/>
+  </file>
+  <file path="D:\js\React\bds\src\components\DaysOff\__tests__\DayOff.test.js">
+    <testCase name="Day off should render correctly" duration="60"/>
+    <testCase name="Day off should handle click remove event" duration="24"/>
+  </file>
+  <file path="D:\js\React\bds\src\components\EmptyResult\__tests__\EmptyResult.test.js">
+    <testCase name="Empty result page should render correctly" duration="47"/>
+    <testCase name="Empty result page should matches with snapshot" duration="7"/>
+  </file>
+  <file path="D:\js\React\bds\src\services\__tests__\services.test.js">
+    <testCase name="services resources" duration="2"/>
+  </file>
+  <file path="D:\js\React\bds\src\components\Input\__tests__\input.test.js">
+    <testCase name="Button component should render correctly" duration="33"/>
+    <testCase name="Button component should matches with snapshot" duration="5"/>
+  </file>
+  <file path="D:\js\React\bds\src\pages\Home\__test__\home.test.js">
+    <testCase name="Home page should render correctly" duration="42"/>
+  </file>
+  <file path="D:\js\React\bds\src\pages\BuilderScheduler\__test__\builder.test.js">
+    <testCase name="Builder scheduler should render correctly" duration="27"/>
+  </file>
+  <file path="D:\js\React\bds\src\translate\locale\pt-br\__tests__\pt-br.test.js">
+    <testCase name="pt-br test Titles" duration="2"/>
+  </file>
+  <file path="D:\js\React\bds\src\pages\RouterScheduler\__test__\router.test.js">
+    <testCase name="Router scheduler should render bot selector correctly" duration="46"/>
+  </file>
+  <file path="D:\js\React\bds\src\utils\__tests__\utils.test.js">
+    <testCase name="utils test toKebabCase" duration="2"/>
+  </file>
+</testExecutions>
