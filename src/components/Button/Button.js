@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 const Button = ({
     variant,
+    size,
     icon,
     text,
     arrow,
@@ -17,6 +18,7 @@ const Button = ({
         aria-label={ariaLabel}
         icon={icon}
         variant={variant}
+        size={size}
         arrow={arrow}
         disabled={disabled}
         onClick={onClick}
@@ -27,6 +29,7 @@ const Button = ({
 
 Button.propTypes = {
     variant: PropTypes.string,
+    size: PropTypes.string,
     icon: PropTypes.string,
     text: PropTypes.string,
     arrow: PropTypes.bool,

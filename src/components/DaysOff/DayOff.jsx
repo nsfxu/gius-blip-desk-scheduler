@@ -50,18 +50,6 @@ const DayOff = ({
                     </div>
                 </div>
             ))}
-            <br />
-            <div className="w1">
-                <Button
-                    dataTestId={`btn-add`}
-                    text={t('labels.new')}
-                    icon="add"
-                    variant="primary"
-                    arrow={false}
-                    disabled={false}
-                    onClick={addDayOff}
-                />
-            </div>
         </div>
     );
 };

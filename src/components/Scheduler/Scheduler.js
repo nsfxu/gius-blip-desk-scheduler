@@ -139,6 +139,8 @@ const Scheduler = ({ currentResources, currentWorkTime, currentTeam }) => {
         const newVal = { ...times };
         newVal.noWorkDays.push(newItem);
         setTimes(newVal);
+
+        document.getElementById('daysBottom').scrollTo();
     };
 
     // #endregion
@@ -174,7 +176,7 @@ const Scheduler = ({ currentResources, currentWorkTime, currentTeam }) => {
                                 de um intervalo de horário por dia.
                             </bds-typo>
                         </div>
-                        <div> 
+                        <div>
                             <ListWeek
                                 times={times}
                                 changeStart={changeStart}
@@ -196,9 +198,15 @@ const Scheduler = ({ currentResources, currentWorkTime, currentTeam }) => {
                                 variant="fs-24"
                                 bold="bold"
                             >
-                                Dias sem atendimento - {currentTeam}
+                                Dias sem atendimento
                             </bds-typo>
-
+                            <bds-typo
+                                style={{ color: '#3A4A65' }}
+                                margin={0}
+                                variant="fs-20"
+                            >
+                                Equipe: {currentTeam}
+                            </bds-typo>
                             <bds-typo
                                 style={{ color: '#3A4A65' }}
                                 variant="fs-15"
@@ -207,23 +215,44 @@ const Scheduler = ({ currentResources, currentWorkTime, currentTeam }) => {
                                 atendimento.
                             </bds-typo>
                         </div>
-                        <div className="pb3">
+                        <div
+                            className="mb4"
+                            style={{
+                                maxHeight: '600px',
+                                overflow: 'auto'
+                            }}
+                        >
                             <DayOff
                                 noWorkDays={times.noWorkDays}
                                 changeDayOff={changeDayOff}
                                 removeDayOff={removeDayOff}
                                 addDayOff={addDayOff}
                             />
+                            <div id='daysBottom'></div>
                         </div>
-                        <div className="w1">
-                            <Button
-                                text={t('labels.save')}
-                                icon="save-disk"
-                                variant="primary"
-                                arrow={false}
-                                disabled={false}
-                                onClick={saveAsync}
-                            />
+                        <div className="bt bp-bc-neutral-medium-wave">
+                            <div className="mt3">
+                                <Button
+                                    dataTestId={`btn-add`}
+                                    text={t('labels.new')}
+                                    icon="add"
+                                    variant="primary"
+                                    arrow={false}
+                                    disabled={false}
+                                    onClick={addDayOff}
+                                />
+                            </div>
+                            <div className="mt3 flex justify-center">
+                                <Button
+                                    text={t('labels.save')}
+                                    icon="save-disk"
+                                    variant="primary"
+                                    size="standard"
+                                    arrow={false}
+                                    disabled={false}
+                                    onClick={saveAsync}
+                                />
+                            </div>
                         </div>
                     </div>
                 </bds-paper>
