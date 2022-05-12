@@ -19,7 +19,7 @@ const ListWeek = ({
             {times.weekdays.map((element, index) => (
                 <div key={element.day}>
                     <bds-tab-panel group={index}>
-                        <div className="flex justify-center mt3">
+                        <div className="flex justify-center mt4">
                             <bds-typo variant="f-16" bold="bold">
                                 {element.day}
                             </bds-typo>

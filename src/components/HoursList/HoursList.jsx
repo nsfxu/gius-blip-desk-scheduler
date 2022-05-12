@@ -44,7 +44,6 @@ const HoursList = ({
                             }}
                         />
                     </div>
-
                     <div className="mb2">
                         <Button
                             text=""
@@ -61,11 +60,12 @@ const HoursList = ({
                 </div>
             ))}
             <br />
-            <div className="w1 mb4">
+            <div className="w1 mb4 w-100 flex justify-center">
                 <Button
                     text={t('labels.new')}
                     icon="add"
                     variant="primary"
+                    size="standard"
                     arrow={false}
                     disabled={false}
                     dataTestId={`btn-add-work-time-${index}`}
