@@ -213,7 +213,7 @@ const Scheduler = ({ currentResources, currentWorkTime, currentTeam }) => {
                             >
                                 Preencha abaixo os dias que não haverão
                                 atendimento.
-                                Obs.: O formato de dia é <strong>MM/DD</strong> (Mês/Dia)
+                                Obs.: O formato da data do feriado deve ser <strong>MM/DD</strong> (Mês/Dia)
                             </bds-typo>
                         </div>
                         <div
@@ -231,7 +231,7 @@ const Scheduler = ({ currentResources, currentWorkTime, currentTeam }) => {
                             />
                             <div id="daysBottom"></div>
                         </div>
-                        <div className="bt bp-bc-neutral-medium-wave">
+                        <div className="bt bw1 bp-bc-neutral-medium-wave">
                             <div className="mt3">
                                 <Button
                                     dataTestId={`btn-add`}
