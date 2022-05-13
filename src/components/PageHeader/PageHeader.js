@@ -48,7 +48,6 @@ const PageHeader = ({
         });
     });
 
-    // #region offset key functions
     const saveOffset = async (value) => {
         withLoadingAsync(async () => {
             const response = await saveResourceAsync(
@@ -66,7 +65,6 @@ const PageHeader = ({
             }
         });
     };
-    //#endregion
 
     const renderInfoTitle = () => (
         <div className="pointer" data-testid="page-header-tooltip">
@@ -82,7 +80,7 @@ const PageHeader = ({
 
     return (
         <div className="flex flex-row items-center-ns justify-between w-100 pv3 mt2 bb bp-bc-neutral-medium-wave">
-            <div className="flex items-center w-100">
+            <div className="flex items-center w-100 ">
                 {isBackNavigation && (
                     <div
                         className="pointer mr1"
@@ -105,9 +103,11 @@ const PageHeader = ({
                     </div>
                 )}
 
-                <h2 className="f3 ml2 mr1 bp-c-neutral-dark-city">{title}</h2>
+                <div className="w-20 ml2 mr1">
+                    <h2 className="f3 bp-c-neutral-dark-city">{title}</h2>
+                </div>
 
-                <div className="w-100 flex justify-center">
+                <div className="w-60 flex justify-center">
                     <div className="mr3">
                         <bds-select value={offset}>
                             {TIMEZONES.map((e, index) => (
@@ -136,8 +136,6 @@ const PageHeader = ({
                         />
                     </div>
                 </div>
-
-                {isInformative && !!helpText && renderInfoTitle()}
             </div>
             {!!relatedOptions && (
                 <div className="flex items-center justify-end">
