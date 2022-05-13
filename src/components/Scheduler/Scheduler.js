@@ -158,9 +158,15 @@ const Scheduler = ({ currentResources, currentWorkTime, currentTeam }) => {
                                 variant="fs-24"
                                 bold="bold"
                             >
-                                Horários de atendimento - {currentTeam}
+                                Horários de atendimento
                             </bds-typo>
-
+                            <bds-typo
+                                style={{ color: '#3A4A65' }}
+                                margin={0}
+                                variant="fs-20"
+                            >
+                                Equipe: {currentTeam}
+                            </bds-typo>
                             <bds-typo
                                 style={{ color: '#3A4A65' }}
                                 variant="fs-15"
@@ -170,7 +176,7 @@ const Scheduler = ({ currentResources, currentWorkTime, currentTeam }) => {
                                 de um intervalo de horário por dia.
                             </bds-typo>
                         </div>
-                        <div style={styles.weekContainer} className='flex-wrap'>
+                        <div style={styles.weekContainer} className="flex-wrap">
                             <ListWeek
                                 times={times}
                                 changeStart={changeStart}
@@ -207,6 +213,7 @@ const Scheduler = ({ currentResources, currentWorkTime, currentTeam }) => {
                             >
                                 Preencha abaixo os dias que não haverão
                                 atendimento.
+                                Obs.: O formato de dia é <strong>MM/DD</strong> (Mês/Dia)
                             </bds-typo>
                         </div>
                         <div
