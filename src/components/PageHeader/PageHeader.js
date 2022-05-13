@@ -109,7 +109,7 @@ const PageHeader = ({
 
                 <div className="w-60 flex justify-center">
                     <div className="mr3">
-                        <bds-select value={offset}>
+                        <bds-select value={offset} icon="clock">
                             {TIMEZONES.map((e, index) => (
                                 <bds-select-option
                                     key={index}
