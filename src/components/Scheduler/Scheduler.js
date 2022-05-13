@@ -5,16 +5,12 @@ import propTypes from 'prop-types';
 import ToastTypes from '../../constants/toast-type';
 
 import { showToast, withLoadingAsync } from '../../services/common-service';
-import {
-    saveResourceAsync,
-    getResourceAsync
-} from '../../services/resources-service';
+import { saveResourceAsync } from '../../services/resources-service';
 
 import { track } from '../../services/analytics-service';
 import { EXTENSION_TRACKS } from '../../constants/trackings';
 
 import { DEFAULT_TIME } from '../../constants/defaultTime';
-import { TIMEZONES } from '../../constants/timezones';
 import { buildSchedulerMessage } from '../../utils/buildSchedulerMessage';
 
 import DayOff from '../DaysOff';
@@ -25,7 +21,6 @@ const Scheduler = ({ currentResources, currentWorkTime, currentTeam }) => {
     const STRONG_DAY_FORMAT_DEFAULT = false;
 
     const [times, setTimes] = useState(null);
-    const [offset, setOffset] = useState(null);
 
     const { t } = useTranslation();
     const styles = {
@@ -51,47 +46,6 @@ const Scheduler = ({ currentResources, currentWorkTime, currentTeam }) => {
             }
         });
     }, [currentResources]);
-
-    // check if exists offset key on resources
-    useEffect(() => {
-        withLoadingAsync(async () => {
-            if (offset === null) {
-                try {
-                    const offsetValue = await getResourceAsync('offset');
-
-                    if (offsetValue) {
-                        setOffset(offsetValue);
-                    } else {
-                        setOffset(-3);
-                    }
-
-                    console.log(offsetValue);
-                } catch (error) {
-                    return {};
-                }
-            }
-        });
-    });
-
-    // #region offset key functions
-    const saveOffset = async (value) => {
-        withLoadingAsync(async () => {
-            const response = await saveResourceAsync(
-                'offset',
-                value,
-                'text/plain'
-            );
-
-            if (response !== {}) {
-                showToast(
-                    ToastTypes.SUCCESS,
-                    'Sucesso',
-                    `Fuso horário alterado com sucesso.`
-                );
-            }
-        });
-    };
-    //#endregion
 
     // #region Scheduler Functions
 
@@ -198,58 +152,6 @@ const Scheduler = ({ currentResources, currentWorkTime, currentTeam }) => {
     if (times !== null) {
         return (
             <>
-                {/* Timezone container */}
-                <bds-paper data-testid="timezoneContainer">
-                    <div className="mt4 pa4">
-                        <div className="pb4 mb4 bb bw1 bp-bc-neutral-medium-wave">
-                            <bds-typo
-                                style={{ color: '#3A4A65' }}
-                                margin={0}
-                                variant="fs-24"
-                                bold="bold"
-                            >
-                                Fuso horário.
-                            </bds-typo>
-                            <bds-typo
-                                style={{ color: '#3A4A65' }}
-                                margin={0}
-                                variant="fs-16"
-                            >
-                                Selecione o seu fuso horário abaixo.
-                            </bds-typo>
-                        </div>
-                        <div className="flex">
-                            <div className="w-40 pr3">
-                                <bds-select value={offset}>
-                                    {TIMEZONES.map((e, index) => (
-                                        <bds-select-option
-                                            key={index}
-                                            value={e.value}
-                                            onClick={() => {
-                                                setOffset(e.value);
-                                            }}
-                                        >
-                                            {e.label}
-                                        </bds-select-option>
-                                    ))}
-                                </bds-select>
-                            </div>
-                            <div>
-                                <Button
-                                    text={t('labels.save')}
-                                    icon="save-disk"
-                                    variant="primary"
-                                    arrow={false}
-                                    disabled={false}
-                                    onClick={() => {
-                                        saveOffset(offset);
-                                    }}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </bds-paper>
-
                 {/* Weeks container */}
                 <bds-paper data-testid="weeksContainer">
                     <div className="mt4 pa4">
@@ -289,7 +191,6 @@ const Scheduler = ({ currentResources, currentWorkTime, currentTeam }) => {
                         </div>
                     </div>
                 </bds-paper>
-
                 {/* No work days container */}
                 <bds-paper data-testid="noWorkDaysContainer">
                     <div className="pa4 mt4">
