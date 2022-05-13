@@ -23,7 +23,7 @@ const getResourceAsync = async (resource) => {
     }
 };
 
-const saveResourceAsync = async (resource, content) => {
+const saveResourceAsync = async (resource, content, type) => {
     try {
         const { response } = await IframeMessageProxy.sendMessage({
             action: IMPConstants.Actions.SEND_COMMAND,
@@ -32,7 +32,7 @@ const saveResourceAsync = async (resource, content) => {
                 command: {
                     method: IMPConstants.CommandMethods.SET,
                     uri: `${BASE_URI}/${resource}`,
-                    type: TYPE_JSON,
+                    type: type,
                     resource: content
                 }
             }

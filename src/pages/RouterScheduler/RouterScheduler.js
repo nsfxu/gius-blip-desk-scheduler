@@ -121,7 +121,8 @@ const RouterScheduler = () => {
 
             const response = await saveResourceAsync(
                 RESOURCE_NAME,
-                attendanceBotKeyResource
+                attendanceBotKeyResource,
+                'application/json'
             );
 
             RequestAllTeams(attendanceBotKey);
