@@ -15,36 +15,33 @@ const HoursList = ({
     const { t } = useTranslation();
 
     return (
-        <div className="center w-40 mt4 mb3">
+        <div className="flex flex-column justify-center ba pa4 mb2 bp-bc-neutral-medium-wave">
             {workTimes.map((element, indexHour) => (
-                <div key={index}>
-                    <div className="mb3">
-                        <Input
-                            name="start"
-                            type="time"
-                            label={t('labels.start')}
-                            maxLength={5}
-                            placeholder="HH:MM"
-                            value={element.start}
-                            dataTestId={`ipt-change-start-work-time-${index}-${indexHour}`}
-                            onChange={(event) => {
-                                changeStart(index, indexHour, event);
-                            }}
-                        />
-                    </div>
-                    <div className="mb3">
-                        <Input
-                            name="start"
-                            type="time"
-                            label={t('labels.end')}
-                            placeholder="HH:MM"
-                            value={element.end}
-                            onChange={(event) => {
-                                changeEnd(index, indexHour, event);
-                            }}
-                        />
-                    </div>
-                    <div className="mb2">
+                <div key={index}>                    
+                    <Input
+                        name="start"
+                        type="time"
+                        label={t('labels.start')}
+                        maxLength={5}
+                        placeholder="HH:MM"
+                        value={element.start}
+                        dataTestId={`ipt-change-start-work-time-${index}-${indexHour}`}
+                        onChange={(event) => {
+                            changeStart(index, indexHour, event);
+                        }}
+                    />
+                    <div className="pa1"></div>
+                    <Input
+                        name="start"
+                        type="time"
+                        label={t('labels.end')}
+                        placeholder="HH:MM"
+                        value={element.end}
+                        onChange={(event) => {
+                            changeEnd(index, indexHour, event);
+                        }}
+                    />
+                    <div className="self-center w-100 mh4 mv3">
                         <Button
                             text=""
                             icon="trash"
@@ -59,13 +56,11 @@ const HoursList = ({
                     </div>
                 </div>
             ))}
-            <br />
-            <div className="w1 mb4 w-100 flex justify-center">
+            <div className="self-center">
                 <Button
                     text={t('labels.new')}
                     icon="add"
                     variant="primary"
-                    size="standard"
                     arrow={false}
                     disabled={false}
                     dataTestId={`btn-add-work-time-${index}`}

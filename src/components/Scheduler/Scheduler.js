@@ -158,15 +158,9 @@ const Scheduler = ({ currentResources, currentWorkTime, currentTeam }) => {
                                 variant="fs-24"
                                 bold="bold"
                             >
-                                Horários de atendimento
+                                Horários de atendimento - {currentTeam}
                             </bds-typo>
-                            <bds-typo
-                                style={{ color: '#3A4A65' }}
-                                margin={0}
-                                variant="fs-20"
-                            >
-                                Equipe: {currentTeam}
-                            </bds-typo>
+
                             <bds-typo
                                 style={{ color: '#3A4A65' }}
                                 variant="fs-15"
@@ -176,7 +170,7 @@ const Scheduler = ({ currentResources, currentWorkTime, currentTeam }) => {
                                 de um intervalo de horário por dia.
                             </bds-typo>
                         </div>
-                        <div>
+                        <div style={styles.weekContainer} className='flex-wrap'>
                             <ListWeek
                                 times={times}
                                 changeStart={changeStart}
@@ -228,7 +222,7 @@ const Scheduler = ({ currentResources, currentWorkTime, currentTeam }) => {
                                 removeDayOff={removeDayOff}
                                 addDayOff={addDayOff}
                             />
-                            <div id='daysBottom'></div>
+                            <div id="daysBottom"></div>
                         </div>
                         <div className="bt bp-bc-neutral-medium-wave">
                             <div className="mt3">
