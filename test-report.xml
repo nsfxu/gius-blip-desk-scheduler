@@ -1,37 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-  <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/constants/__tests__/constants.test.js">
-  </file>
   <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/components/PageHeader/__tests__/pageHeader.test.js">
-  </file>
-  <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/components/Scheduler/__test__/scheduler.test.js">
-  </file>
-  <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/components/HoursList/__tests__/HourList.test.js">
-  </file>
-  <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/components/SelectTeam/__test__/selectTeam.test.js">
-  </file>
-  <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/store/actions/__tests__/actions.test.js">
-  </file>
-  <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/components/DaysOff/__tests__/DayOff.test.js">
-  </file>
-  <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/components/Paper/__test__/paper.test.js">
-  </file>
-  <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/components/EmptyResult/__tests__/EmptyResult.test.js">
-  </file>
-  <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/components/Button/__tests__/button.test.js">
-  </file>
-  <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/services/__tests__/services.test.js">
-  </file>
-  <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/components/Input/__tests__/input.test.js">
-  </file>
-  <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/pages/BuilderScheduler/__test__/builder.test.js">
-  </file>
-  <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/pages/Home/__test__/home.test.js">
-  </file>
-  <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/translate/locale/pt-br/__tests__/pt-br.test.js">
+    <testCase name="Page header component should render correctly" duration="269"/>
+    <testCase name="Page header component should handle click event" duration="38"/>
+    <testCase name="Page header component should matches with snapshot" duration="37"/>
   </file>
   <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/pages/RouterScheduler/__test__/router.test.js">
+    <testCase name="Router scheduler should render bot selector correctly" duration="112"/>
+  </file>
+  <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/pages/BuilderScheduler/__test__/builder.test.js">
+    <testCase name="Builder scheduler should render correctly" duration="122"/>
+  </file>
+  <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/components/Input/__tests__/input.test.js">
+    <testCase name="Button component should render correctly" duration="33"/>
+    <testCase name="Button component should matches with snapshot" duration="11"/>
+  </file>
+  <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/components/DaysOff/__tests__/DayOff.test.js">
+    <testCase name="Day off should render correctly" duration="67"/>
+    <testCase name="Day off should handle click remove event" duration="56"/>
+  </file>
+  <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/components/Scheduler/__test__/scheduler.test.js">
+    <testCase name="Scheduler should render the two main containers" duration="140"/>
+    <testCase name="Scheduler should show a loading text if the resources are not ready" duration="50"/>
+  </file>
+  <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/components/HoursList/__tests__/HourList.test.js">
+    <testCase name="Day off should render correctly" duration="40"/>
+    <testCase name="Day off should handle click add work time event" duration="15"/>
+    <testCase name="Day off should handle click remove work time event" duration="10"/>
+  </file>
+  <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/components/Paper/__test__/paper.test.js">
+    <testCase name="Paper should render correctly" duration="142"/>
+    <testCase name="Paper should handle click event" duration="11"/>
+  </file>
+  <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/pages/Home/__test__/home.test.js">
+    <testCase name="Home page should render correctly" duration="27"/>
+  </file>
+  <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/constants/__tests__/constants.test.js">
+    <testCase name="Constants test ApplicationActions values" duration="3"/>
+    <testCase name="Constants test BlipPortalDestinations values" duration="0"/>
+    <testCase name="Constants test BlipPortalToastTypes values" duration="11"/>
+    <testCase name="Constants test CommonActions values" duration="1"/>
+    <testCase name="Constants test IframeMessageProxyActions values" duration="4"/>
+    <testCase name="Constants test CommonActions values" duration="3"/>
+    <testCase name="Constants test TrackingEvents values" duration="0"/>
+    <testCase name="Constants test UserActions values" duration="2"/>
+  </file>
+  <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/components/SelectTeam/__test__/selectTeam.test.js">
+    <testCase name="Select team should render correctly" duration="39"/>
+    <testCase name="Select team should call parentCallback with Todos as a parameters" duration="43"/>
+  </file>
+  <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/components/Button/__tests__/button.test.js">
+    <testCase name="Button component should render correctly" duration="28"/>
+    <testCase name="Button component should handle click event" duration="11"/>
+    <testCase name="Button component should matches with snapshot" duration="10"/>
+  </file>
+  <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/services/__tests__/services.test.js">
+    <testCase name="services resources" duration="4"/>
+  </file>
+  <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/store/actions/__tests__/actions.test.js">
+    <testCase name="actions test Application" duration="5"/>
+    <testCase name="actions test User" duration="1"/>
   </file>
   <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/utils/__tests__/utils.test.js">
+    <testCase name="utils test toKebabCase" duration="3"/>
+  </file>
+  <file path="/home/fluna/Documentos/React/blip-desk-scheduler-ui-refact/src/translate/locale/pt-br/__tests__/pt-br.test.js">
+    <testCase name="pt-br test Titles" duration="2"/>
   </file>
 </testExecutions>
