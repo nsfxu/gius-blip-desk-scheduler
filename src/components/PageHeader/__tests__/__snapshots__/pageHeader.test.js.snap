@@ -5,7 +5,7 @@ exports[`Page header component should matches with snapshot 1`] = `
   class="flex flex-row items-center-ns justify-between w-100 pv3 mt2 bb bp-bc-neutral-medium-wave"
 >
   <div
-    class="flex items-center"
+    class="flex items-center w-100 "
   >
     <div
       data-testid="page-header-icon"
@@ -15,25 +15,448 @@ exports[`Page header component should matches with snapshot 1`] = `
         name="plugin"
       />
     </div>
-    <h2
-      class="f3 ml2 mr1 bp-c-neutral-dark-city"
-    >
-      Plugins
-    </h2>
     <div
-      class="pointer"
-      data-testid="page-header-tooltip"
+      class="w-20 ml2 mr1"
     >
-      <bds-tooltip
-        position="right-center"
-        tooltip-text="Tooltip Text Info"
+      <h2
+        class="f3 bp-c-neutral-dark-city"
       >
-        <bds-icon
-          color="#8CA0B3"
-          name="info"
-          theme="solid"
-        />
-      </bds-tooltip>
+        Plugins
+      </h2>
+    </div>
+    <div
+      class="w-60 flex justify-center"
+    >
+      <div
+        class="mr3"
+      >
+        <bds-select
+          icon="clock"
+        >
+          <bds-select-option
+            value="-12"
+          >
+            (GMT-12:00) International Date Line West
+          </bds-select-option>
+          <bds-select-option
+            value="-11"
+          >
+            (GMT-11:00) Midway Island, Samoa
+          </bds-select-option>
+          <bds-select-option
+            value="-10"
+          >
+            (GMT-10:00) Hawaii
+          </bds-select-option>
+          <bds-select-option
+            value="-9"
+          >
+            (GMT-09:00) Alaska
+          </bds-select-option>
+          <bds-select-option
+            value="-8"
+          >
+            (GMT-08:00) Pacific Time (US & Canada)
+          </bds-select-option>
+          <bds-select-option
+            value="-8"
+          >
+            (GMT-08:00) Tijuana, Baja California
+          </bds-select-option>
+          <bds-select-option
+            value="-7"
+          >
+            (GMT-07:00) Arizona
+          </bds-select-option>
+          <bds-select-option
+            value="-7"
+          >
+            (GMT-07:00) Chihuahua, La Paz, Mazatlan
+          </bds-select-option>
+          <bds-select-option
+            value="-7"
+          >
+            (GMT-07:00) Mountain Time (US & Canada)
+          </bds-select-option>
+          <bds-select-option
+            value="-6"
+          >
+            (GMT-06:00) Central America
+          </bds-select-option>
+          <bds-select-option
+            value="-6"
+          >
+            (GMT-06:00) Central Time (US & Canada)
+          </bds-select-option>
+          <bds-select-option
+            value="-6"
+          >
+            (GMT-06:00) Guadalajara, Mexico City, Monterrey
+          </bds-select-option>
+          <bds-select-option
+            value="-6"
+          >
+            (GMT-06:00) Saskatchewan
+          </bds-select-option>
+          <bds-select-option
+            value="-5"
+          >
+            (GMT-05:00) Bogota, Lima, Quito, Rio Branco
+          </bds-select-option>
+          <bds-select-option
+            value="-5"
+          >
+            (GMT-05:00) Eastern Time (US & Canada)
+          </bds-select-option>
+          <bds-select-option
+            value="-5"
+          >
+            (GMT-05:00) Indiana (East)
+          </bds-select-option>
+          <bds-select-option
+            value="-4"
+          >
+            (GMT-04:00) Atlantic Time (Canada)
+          </bds-select-option>
+          <bds-select-option
+            value="-4"
+          >
+            (GMT-04:00) Caracas, La Paz
+          </bds-select-option>
+          <bds-select-option
+            value="-4"
+          >
+            (GMT-04:00) Manaus
+          </bds-select-option>
+          <bds-select-option
+            value="-4"
+          >
+            (GMT-04:00) Santiago
+          </bds-select-option>
+          <bds-select-option
+            value="-3.5"
+          >
+            (GMT-03:30) Newfoundland
+          </bds-select-option>
+          <bds-select-option
+            value="-3"
+          >
+            (GMT-03:00) Brasilia
+          </bds-select-option>
+          <bds-select-option
+            value="-3"
+          >
+            (GMT-03:00) Buenos Aires, Georgetown
+          </bds-select-option>
+          <bds-select-option
+            value="-3"
+          >
+            (GMT-03:00) Greenland
+          </bds-select-option>
+          <bds-select-option
+            value="-3"
+          >
+            (GMT-03:00) Montevideo
+          </bds-select-option>
+          <bds-select-option
+            value="-2"
+          >
+            (GMT-02:00) Mid-Atlantic
+          </bds-select-option>
+          <bds-select-option
+            value="-1"
+          >
+            (GMT-01:00) Cape Verde Is.
+          </bds-select-option>
+          <bds-select-option
+            value="-1"
+          >
+            (GMT-01:00) Azores
+          </bds-select-option>
+          <bds-select-option
+            value="0"
+          >
+            (GMT+00:00) Casablanca, Monrovia, Reykjavik
+          </bds-select-option>
+          <bds-select-option
+            value="0"
+          >
+            (GMT+00:00) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London
+          </bds-select-option>
+          <bds-select-option
+            value="1"
+          >
+            (GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna
+          </bds-select-option>
+          <bds-select-option
+            value="1"
+          >
+            (GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague
+          </bds-select-option>
+          <bds-select-option
+            value="1"
+          >
+            (GMT+01:00) Brussels, Copenhagen, Madrid, Paris
+          </bds-select-option>
+          <bds-select-option
+            value="1"
+          >
+            (GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb
+          </bds-select-option>
+          <bds-select-option
+            value="1"
+          >
+            (GMT+01:00) West Central Africa
+          </bds-select-option>
+          <bds-select-option
+            value="2"
+          >
+            (GMT+02:00) Amman
+          </bds-select-option>
+          <bds-select-option
+            value="2"
+          >
+            (GMT+02:00) Athens, Bucharest, Istanbul
+          </bds-select-option>
+          <bds-select-option
+            value="2"
+          >
+            (GMT+02:00) Beirut
+          </bds-select-option>
+          <bds-select-option
+            value="2"
+          >
+            (GMT+02:00) Cairo
+          </bds-select-option>
+          <bds-select-option
+            value="2"
+          >
+            (GMT+02:00) Harare, Pretoria
+          </bds-select-option>
+          <bds-select-option
+            value="2"
+          >
+            (GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius
+          </bds-select-option>
+          <bds-select-option
+            value="2"
+          >
+            (GMT+02:00) Jerusalem
+          </bds-select-option>
+          <bds-select-option
+            value="2"
+          >
+            (GMT+02:00) Minsk
+          </bds-select-option>
+          <bds-select-option
+            value="2"
+          >
+            (GMT+02:00) Windhoek
+          </bds-select-option>
+          <bds-select-option
+            value="3"
+          >
+            (GMT+03:00) Kuwait, Riyadh, Baghdad
+          </bds-select-option>
+          <bds-select-option
+            value="3"
+          >
+            (GMT+03:00) Moscow, St. Petersburg, Volgograd
+          </bds-select-option>
+          <bds-select-option
+            value="3"
+          >
+            (GMT+03:00) Nairobi
+          </bds-select-option>
+          <bds-select-option
+            value="3"
+          >
+            (GMT+03:00) Tbilisi
+          </bds-select-option>
+          <bds-select-option
+            value="3.5"
+          >
+            (GMT+03:30) Tehran
+          </bds-select-option>
+          <bds-select-option
+            value="4"
+          >
+            (GMT+04:00) Abu Dhabi, Muscat
+          </bds-select-option>
+          <bds-select-option
+            value="4"
+          >
+            (GMT+04:00) Baku
+          </bds-select-option>
+          <bds-select-option
+            value="4"
+          >
+            (GMT+04:00) Yerevan
+          </bds-select-option>
+          <bds-select-option
+            value="4.5"
+          >
+            (GMT+04:30) Kabul
+          </bds-select-option>
+          <bds-select-option
+            value="5"
+          >
+            (GMT+05:00) Yekaterinburg
+          </bds-select-option>
+          <bds-select-option
+            value="5"
+          >
+            (GMT+05:00) Islamabad, Karachi, Tashkent
+          </bds-select-option>
+          <bds-select-option
+            value="5.5"
+          >
+            (GMT+05:30) Sri Jayawardenapura
+          </bds-select-option>
+          <bds-select-option
+            value="5.5"
+          >
+            (GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi
+          </bds-select-option>
+          <bds-select-option
+            value="5.75"
+          >
+            (GMT+05:45) Kathmandu
+          </bds-select-option>
+          <bds-select-option
+            value="6"
+          >
+            (GMT+06:00) Almaty, Novosibirsk
+          </bds-select-option>
+          <bds-select-option
+            value="6"
+          >
+            (GMT+06:00) Astana, Dhaka
+          </bds-select-option>
+          <bds-select-option
+            value="6.5"
+          >
+            (GMT+06:30) Yangon (Rangoon)
+          </bds-select-option>
+          <bds-select-option
+            value="7"
+          >
+            (GMT+07:00) Bangkok, Hanoi, Jakarta
+          </bds-select-option>
+          <bds-select-option
+            value="7"
+          >
+            (GMT+07:00) Krasnoyarsk
+          </bds-select-option>
+          <bds-select-option
+            value="8"
+          >
+            (GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi
+          </bds-select-option>
+          <bds-select-option
+            value="8"
+          >
+            (GMT+08:00) Kuala Lumpur, Singapore
+          </bds-select-option>
+          <bds-select-option
+            value="8"
+          >
+            (GMT+08:00) Irkutsk, Ulaan Bataar
+          </bds-select-option>
+          <bds-select-option
+            value="8"
+          >
+            (GMT+08:00) Perth
+          </bds-select-option>
+          <bds-select-option
+            value="8"
+          >
+            (GMT+08:00) Taipei
+          </bds-select-option>
+          <bds-select-option
+            value="9"
+          >
+            (GMT+09:00) Osaka, Sapporo, Tokyo
+          </bds-select-option>
+          <bds-select-option
+            value="9"
+          >
+            (GMT+09:00) Seoul
+          </bds-select-option>
+          <bds-select-option
+            value="9"
+          >
+            (GMT+09:00) Yakutsk
+          </bds-select-option>
+          <bds-select-option
+            value="9.5"
+          >
+            (GMT+09:30) Adelaide
+          </bds-select-option>
+          <bds-select-option
+            value="9.5"
+          >
+            (GMT+09:30) Darwin
+          </bds-select-option>
+          <bds-select-option
+            value="10"
+          >
+            (GMT+10:00) Brisbane
+          </bds-select-option>
+          <bds-select-option
+            value="10"
+          >
+            (GMT+10:00) Canberra, Melbourne, Sydney
+          </bds-select-option>
+          <bds-select-option
+            value="10"
+          >
+            (GMT+10:00) Hobart
+          </bds-select-option>
+          <bds-select-option
+            value="10"
+          >
+            (GMT+10:00) Guam, Port Moresby
+          </bds-select-option>
+          <bds-select-option
+            value="10"
+          >
+            (GMT+10:00) Vladivostok
+          </bds-select-option>
+          <bds-select-option
+            value="11"
+          >
+            (GMT+11:00) Magadan, Solomon Is., New Caledonia
+          </bds-select-option>
+          <bds-select-option
+            value="12"
+          >
+            (GMT+12:00) Auckland, Wellington
+          </bds-select-option>
+          <bds-select-option
+            value="12"
+          >
+            (GMT+12:00) Fiji, Kamchatka, Marshall Is.
+          </bds-select-option>
+          <bds-select-option
+            value="13"
+          >
+            (GMT+13:00) Nuku'alofa
+          </bds-select-option>
+        </bds-select>
+      </div>
+      <div>
+        <bds-button
+          aria-label="bds-button"
+          arrow="false"
+          data-testid="bds-button"
+          disabled="false"
+          icon="save-disk"
+          variant="primary"
+        >
+          labels.save
+        </bds-button>
+      </div>
     </div>
   </div>
   <div

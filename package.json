@@ -126,6 +126,7 @@
         "eslint-plugin-react-hooks": "^4.2.0",
         "husky": "^7.0.4",
         "jest": "^28.1.0",
+        "jest-environment-jsdom": "^28.1.0",
         "jest-mock-axios": "^4.6.1",
         "jest-sonar-reporter": "^2.0.0",
         "prettier": "^2.6.2"
