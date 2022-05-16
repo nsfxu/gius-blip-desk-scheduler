@@ -64,19 +64,7 @@ const PageHeader = ({
                 );
             }
         });
-    };
-
-    const renderInfoTitle = () => (
-        <div className="pointer" data-testid="page-header-tooltip">
-            <bds-tooltip tooltip-text={helpText} position="right-center">
-                <bds-icon
-                    name="info"
-                    theme="solid"
-                    color={COLOR_NEUTRAL_MEDIUM_CLOUD}
-                />
-            </bds-tooltip>
-        </div>
-    );
+    }
 
     return (
         <div className="flex flex-row items-center-ns justify-between w-100 pv3 mt2 bb bp-bc-neutral-medium-wave">

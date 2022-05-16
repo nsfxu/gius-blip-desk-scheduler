@@ -27,7 +27,6 @@ describe('Page header component', () => {
         ).toBeInTheDocument();
 
         expect(screen.queryByTestId('page-header-icon')).toBeInTheDocument();
-        expect(screen.queryByTestId('page-header-tooltip')).toBeInTheDocument();
 
         expect(screen.getByText(/hello element/i)).toBeInTheDocument();
 
