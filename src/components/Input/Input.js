@@ -6,6 +6,7 @@ const Input = ({
     name,
     label,
     placeholder,
+    disabled,
     icon,
     value,
     helperMessage,
@@ -83,6 +84,7 @@ const Input = ({
                 cols={textareaCols}
                 rows={textareaRows}
                 is-textarea={isTextarea}
+                disabled={!disabled ? false : disabled}
             />
         </div>
     );
@@ -92,6 +94,7 @@ Input.propTypes = {
     name: PropTypes.string,
     label: PropTypes.string,
     placeholder: PropTypes.string,
+    disabled: PropTypes.bool,
     icon: PropTypes.string,
     value: PropTypes.string,
     dataTestId: PropTypes.string,

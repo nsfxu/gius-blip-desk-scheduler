@@ -5,6 +5,7 @@ import RoutesPath from '../constants/routes-path';
 import HomePage from '../pages/Home';
 import RouterScheduler from '../pages/RouterScheduler';
 import BuilderScheduler from '../pages/BuilderScheduler';
+import Config from '../pages/Config';
 
 import Initialize from './Initialize';
 import Analytics from './Analytics';
@@ -24,6 +25,11 @@ const Routes = () => (
                     exact
                     path={RoutesPath.BUILDER_SCHEDULER.PATH}
                     component={BuilderScheduler}
+                />
+                <Route
+                    exact
+                    path={RoutesPath.CONFIGURATIONS.PATH}
+                    component={Config}
                 />
             </Switch>
         </Analytics>

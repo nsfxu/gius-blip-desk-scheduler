@@ -1,17 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-
+import React from 'react';
 import Proptypes from 'prop-types';
-import ToastTypes from '../../constants/toast-type';
-
-import { showToast, withLoadingAsync } from '../../services/common-service';
-import {
-    getResourceAsync,
-    saveResourceAsync
-} from '../../services/resources-service';
-
-import Button from '../Button';
-import { TIMEZONES } from '../../constants/timezones';
+import { useHistory } from 'react-router-dom';
 
 const COLOR_NEUTRAL_DARK_ROOFTOP = '#505F79';
 const COLOR_NEUTRAL_MEDIUM_CLOUD = '#8CA0B3';
@@ -25,50 +14,23 @@ const PageHeader = ({
     onBackPressed,
     relatedOptions
 }) => {
-    const [offset, setOffset] = useState(null);
-    const { t } = useTranslation();
+    const history = useHistory();
 
-    // check if exists offset key on resources
-    useEffect(() => {
-        withLoadingAsync(async () => {
-            if (offset === null) {
-                try {
-                    const offsetValue = await getResourceAsync('offset');
-
-                    if (offsetValue.name === 'Error') {
-                        setOffset(-3);
-                        return;
-                    }
-
-                    setOffset(offsetValue);
-                } catch (error) {
-                    return {};
-                }
-            }
-        });
-    });
-
-    const saveOffset = async (value) => {
-        withLoadingAsync(async () => {
-            const response = await saveResourceAsync(
-                'offset',
-                value,
-                'text/plain'
-            );
-
-            if (response !== {}) {
-                showToast(
-                    ToastTypes.SUCCESS,
-                    'Sucesso',
-                    `Fuso horário alterado com sucesso.`
-                );
-            }
-        });
-    }
+    const renderInfoTitle = () => (
+        <div className="pointer" data-testid="page-header-tooltip">
+            <bds-tooltip tooltip-text={helpText} position="right-center">
+                <bds-icon
+                    name="info"
+                    theme="solid"
+                    color={COLOR_NEUTRAL_MEDIUM_CLOUD}
+                />
+            </bds-tooltip>
+        </div>
+    );
 
     return (
         <div className="flex flex-row items-center-ns justify-between w-100 pv3 mt2 bb bp-bc-neutral-medium-wave">
-            <div className="flex items-center w-100 ">
+            <div className="flex items-center">
                 {isBackNavigation && (
                     <div
                         className="pointer mr1"
@@ -91,42 +53,66 @@ const PageHeader = ({
                     </div>
                 )}
 
-                <div className="w-20 ml2 mr1">
-                    <h2 className="f3 bp-c-neutral-dark-city">{title}</h2>
-                </div>
+                <h2 className="f3 ml2 mr1 bp-c-neutral-dark-city">{title}</h2>
 
-                <div className="w-60 flex justify-center">
-                    <div className="mr3">
-                        <bds-select value={offset} icon="clock">
-                            {TIMEZONES.map((e, index) => (
-                                <bds-select-option
-                                    key={index}
-                                    value={e.value}
-                                    onClick={() => {
-                                        setOffset(e.value);
-                                    }}
-                                >
-                                    {e.label}
-                                </bds-select-option>
-                            ))}
-                        </bds-select>
-                    </div>
-                    <div>
-                        <Button
-                            text={t('labels.save')}
-                            icon="save-disk"
-                            variant="primary"
-                            arrow={false}
-                            disabled={false}
-                            onClick={() => {
-                                saveOffset(offset);
-                            }}
-                        />
-                    </div>
-                </div>
+                {isInformative && !!helpText && renderInfoTitle()}
             </div>
+
             {!!relatedOptions && (
-                <div className="flex items-center justify-end">
+                <div className="flex items-center justify-center">
+                    {/* Configuration icon */}
+                    <div className="mr3">
+                        <bds-tooltip
+                            position="bottom-center"
+                            tooltip-text="Configurações"
+                        >
+                            <a
+                                href="#"
+                                onClick={() => {
+                                    history.push('/config');
+                                }}
+                            >
+                                <bds-icon
+                                    name="settings-general"
+                                    theme="outline"
+                                    size="large"
+                                    aria-label="Ícone de configuração"
+                                    style={
+                                        history.location.pathname !== '/config'
+                                            ? { color: 'black' }
+                                            : { color: 'royalblue' }
+                                    }
+                                ></bds-icon>
+                            </a>
+                        </bds-tooltip>
+                    </div>
+                    {/* Clock icon */}
+                    <div className="mr3">
+                        <bds-tooltip
+                            position="bottom-center"
+                            tooltip-text="Horários"
+                        >
+                            <a
+                                href="#"
+                                onClick={() => {
+                                    history.push('/');
+                                }}
+                            >
+                                <bds-icon
+                                    name="clock"
+                                    theme="outline"
+                                    size="large"
+                                    aria-label="Ícone de relógio"
+                                    style={
+                                        history.location.pathname !== '/config'
+                                            ? { color: 'royalblue' }
+                                            : { color: 'black' }
+                                    }
+                                ></bds-icon>
+                            </a>
+                        </bds-tooltip>
+                    </div>
+
                     {relatedOptions}
                 </div>
             )}

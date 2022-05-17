@@ -6,7 +6,8 @@ const translations = {
         start: 'Comienzo',
         end: 'El fin',
         new: 'Nuevo',
-        save: 'Ahorrar'
+        save: 'Ahorrar',
+        edit: 'Editar'
     },
     button: {
         repository: 'Repositorio'

@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router-dom';
 
 import Header from '../../components/Header';
 import SelectTeam from '../../components/SelectTeam/SelectTeam';
 import Scheduler from '../../components/Scheduler/Scheduler';
-import Input from '../../components/Input';
-import Button from '../../components/Button';
 
 import ToastTypes from '../../constants/toast-type';
 import settings from '../../config';
@@ -24,7 +22,7 @@ const BLANK = '_blank';
 const RESOURCE_NAME = 'botAttendanceKey';
 
 const RouterScheduler = () => {
-    const { t } = useTranslation();
+    const history = useHistory();
 
     const [application, setApplication] = useState({ shortName: 'init' });
     const [attendanceBotKey, setAttendanceBotkey] = useState(null);
@@ -58,6 +56,7 @@ const RouterScheduler = () => {
                         RequestAllTeams(resourceAttendanceBotKey.key);
                     } else {
                         setAttendanceBotkey(null);
+                        history.push('/config');
                     }
                 } catch (error) {
                     return {};
@@ -207,54 +206,6 @@ const RouterScheduler = () => {
                 title="Blip desk scheduler"
                 onClick={() => window.open(settings.repositoryUrl, BLANK)}
             />
-
-            {/* Bot selector */}
-            <bds-paper data-testid="botContainer">
-                <div className="pa4 mt4">
-                    {/* Title container */}
-                    <div className="pb4 mb4 bb bw1 bp-bc-neutral-medium-wave">
-                        <bds-typo
-                            style={{ color: '#3A4A65' }}
-                            margin={5}
-                            variant="fs-24"
-                            bold="bold"
-                        >
-                            Bot de Atendimento Humano
-                        </bds-typo>
-                        <bds-typo style={{ color: '#3A4A65' }} variant="fs-15">
-                            Insira a chave do seu bot de atendimento humano
-                            abaixo.
-                        </bds-typo>
-                    </div>
-
-                    {/* Inserting attendance bot key */}
-                    <div className="flex">
-                        <div className="w-80 pr3">
-                            <Input
-                                name="attendanceBotKey"
-                                icon="robot"
-                                placeholder="Key XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-                                value={attendanceBotKey}
-                                onChange={(e) => {
-                                    setAttendanceBotkey(e.target.value);
-                                }}
-                            />
-                        </div>
-                        <div>
-                            <Button
-                                text={t('labels.save')}
-                                icon="save-disk"
-                                variant="primary"
-                                arrow={false}
-                                disabled={false}
-                                onClick={() => {
-                                    saveNewKey(attendanceBotKey);
-                                }}
-                            />
-                        </div>
-                    </div>
-                </div>
-            </bds-paper>
 
             {/* Team selector */}
             {allTeams !== undefined ? (
